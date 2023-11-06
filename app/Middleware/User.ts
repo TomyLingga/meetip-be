@@ -1,44 +1,44 @@
-import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
-import { verify } from 'jsonwebtoken';
-import Env from '@ioc:Adonis/Core/Env';
-import axios from 'axios';
+import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { verify } from 'jsonwebtoken'
+import Env from '@ioc:Adonis/Core/Env'
+import axios from 'axios'
 
 export default class User {
   public async handle({ request, response }: HttpContextContract, next: () => Promise<void>) {
-    try {
-      const authorizationHeader = request.header('Authorization');
+    // try {
+      const authorizationHeader = request.header('Authorization')
 
       if (!authorizationHeader || !authorizationHeader.startsWith('Bearer ')) {
-        return response.status(401).json({ error: 'Invalid Authorization header' });
+        return response.status(401).json({ error: 'Invalid Authorization header' })
       }
 
-      const jwt = authorizationHeader.replace('Bearer ', '');
-      const decoded = verify(jwt, Env.get('JWT_SECRET'));
+      const jwt = authorizationHeader.replace('Bearer ', '')
+      const decoded = verify(jwt, Env.get('JWT_SECRET'))
 
-      const appId = Env.get('APP_ID');
-      const urlAkses = Env.get('URL_PORTAL')+`akses/mine/${appId}`;
+      const appId = Env.get('APP_ID')
+      const urlAkses = Env.get('URL_PORTAL')+`akses/mine/${appId}`
 
       const getAkses = await axios.get(urlAkses, {
         headers: {
           'Authorization': authorizationHeader,
         },
-      });
+      })
 
       if (!getAkses.data || getAkses.data.level_akses < 1) {
-        return response.status(401).json({ error: 'Unauthorized' });
+        return response.status(401).json({ error: 'Unauthorized' })
       }
 
       if (Math.floor(Date.now() / 1000) >= decoded.exp) {
-        return response.status(401).json({ error: 'Token has expired' });
+        return response.status(401).json({ error: 'Token has expired' })
       }
 
-      request['userToken'] = authorizationHeader;
-      request['decoded'] = decoded;
+      request['userToken'] = authorizationHeader
+      request['decoded'] = decoded
 
-      await next();
-    } catch (error) {
-      console.error(error);
-      return response.status(401).json({ error, message: 'Invalid or expired token' });
-    }
+      await next()
+    // } catch (error) {
+    //   console.error(error)
+    //   return response.status(401).json({ error, message: 'Invalid or expired token' })
+    // }
   }
 }

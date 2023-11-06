@@ -57,7 +57,9 @@
   "dependencies": {
     "@adonisjs/core": "^5.9.0",
     "@adonisjs/lucid": "^18.4.2",
+    "@adonisjs/mail": "^8.2.1",
     "@adonisjs/repl": "^3.1.11",
+    "@adonisjs/view": "^6.2.0",
     "axios": "^1.5.1",
     "jsonwebtoken": "^9.0.2",
     "luxon": "^3.4.3",

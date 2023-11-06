@@ -24,4 +24,17 @@ Route.get('/', async () => {
   return { hello: 'world' }
 }).middleware('user')
 
-Route.get('/test', 'Test/TestMiddlesController.test').middleware('user')
+Route.group(() => {
+  Route.get('/test', 'Test/TestMiddlesController.test')
+
+  //Pagu
+  Route.get('/uang', 'Misc/UangsController.index')
+  Route.get('/uang/:id/get', 'Misc/UangsController.show')
+  Route.get('/uang/wilayah/:wilayah/level/:jabatan', 'Misc/UangsController.showByJabatanWilayah')
+  Route.put('/uang/:id/update', 'Misc/UangsController.update')
+
+  //Form
+  Route.get('/my-spdk', 'User/SpdkController.indexByUser')
+  Route.post('/my-spdk/add', 'User/SpdkController.create')
+
+}).middleware('user')
