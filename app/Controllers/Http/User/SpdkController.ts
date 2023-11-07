@@ -11,6 +11,7 @@ import { DateTime } from 'luxon'
 import Destination from 'App/Models/Destination'
 import SpdkLog from 'App/Models/SpdkLog'
 import Mail from '@ioc:Adonis/Addons/Mail'
+import Division from 'App/Models/Division'
 
 export default class SpdkController {
   public async indexByUser({ request, response }) {
@@ -78,6 +79,8 @@ export default class SpdkController {
 
     try {
       const { userData, pemberiTugas, getDiv, getDept } = await this.processRequest(request)
+      const teruskan = await this.getTeruskan(userData)
+
       const lampiranFile = request.file('lampiran')
 
       if (lampiranFile.state != 'consumed') {
@@ -93,7 +96,7 @@ export default class SpdkController {
 
       const nomorSurat = await this.generateNomorSurat()
 
-      const newForm = await this.createForm(userData, pemberiTugas, fileName, getDiv, getDept, request, nomorSurat)
+      const newForm = await this.createForm(userData, pemberiTugas, fileName, getDiv, getDept, request, nomorSurat, teruskan)
       const start_longitude = request.input('start_longitude')
       const start_latitude = request.input('start_latitude')
       const latitude = request.input('latitude', [])
@@ -214,17 +217,6 @@ export default class SpdkController {
         info: '-',
       })
 
-      await Mail.sendLater((message) =>{
-        message
-        .from(Env.get('SMTP_USERNAME'))
-        .to(pemberiTugas.email)
-        .subject('Meetrip Notification')
-        .priority('high')
-        .htmlView('emails/welcome', {
-          user: {fullName: 'Some name'},
-          url: 'https://your-app.com/verification-url',
-        })
-      })
       await trx.commit()
 
       return response.send({ success: true, data: newForm }, 200)
@@ -252,12 +244,81 @@ export default class SpdkController {
     return { userData, pemberiTugas, getDiv, getDept }
   }
 
-  async createForm(userData, pemberiTugas, fileName, getDiv, getDept, request, nomorSurat) {
+  async getTeruskan(userData){
+    let teruskan;
+    if (userData.grade == "1" || userData.grade == "2" || userData.grade == "3") {
+        teruskan = await User.query()
+          .where('departemen', userData.departemen)
+          .where('grade', '4')
+          .first()
+
+      if (!teruskan){
+        teruskan = await User.query()
+        .where('divisi', userData.divisi)
+        .where('grade', '5')
+        .first()
+      }
+
+      if (!teruskan) {
+        const division  = await Division.query().where('id', userData.divisi).first()
+
+        if (division) {
+          const bomUser = await User.find(division.bom)
+          if (bomUser) {
+            return bomUser
+          }
+        }
+      }
+      return teruskan
+    }else if (userData.grade == "4") {
+      teruskan = await User.query()
+        .where('divisi', userData.divisi)
+        .where('grade', '5')
+        .first()
+
+      if (!teruskan) {
+        const division = await Division.query().where('id', userData.divisi).first()
+
+        if (division) {
+          const bomUser = await User.find(division.bom);
+          if (bomUser) {
+            return bomUser;
+          }
+        }
+      }
+      return teruskan;
+    }else{
+      const division = await Division.query().where('id', userData.divisi).first()
+      if (division) {
+        const bomUser = await User.find(division.bom);
+        if (bomUser) {
+          return bomUser;
+        }
+      }
+    }
+  }
+
+  async createForm(userData, pemberiTugas, fileName, getDiv, getDept, request, nomorSurat, teruskan) {
     let status, info;
 
     if (request.input('uang_panjar') === '0') {
       status = "1";
       info = "Menunggu Persetujuan dari " + pemberiTugas.name;
+
+      await Mail.sendLater((message) =>{
+        message
+        .from(Env.get('SMTP_USERNAME'))
+        .to(pemberiTugas.email)
+        .subject('Meetrip Notification')
+        .priority('high')
+        .htmlView('emails/welcome', {
+          user: userData,
+          pemberiTugas: pemberiTugas,
+          tgl_berangkat: request.input('tgl_berangkat'),
+          tgl_kembali: request.input('tgl_kembali'),
+          url: Env.get('URL_FE_PORTAL'),
+        })
+      })
     } else {
       status = "300";
       info = "Silahkan ajukan DownPayment";
@@ -302,7 +363,7 @@ export default class SpdkController {
       total: 0,
       status: status,
       info: info,
-      teruskan: 2,
+      teruskan: teruskan.id,
       airport: 0
     })
   }
