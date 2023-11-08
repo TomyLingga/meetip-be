@@ -3,6 +3,8 @@ import { BaseModel, BelongsTo, HasMany, HasOne, belongsTo, column, hasMany, hasO
 import BteLuarNegeri from './BteLuarNegeri'
 import Destination from './Destination'
 import User from './User'
+import DpLuarNegeri from './DpLuarNegeri'
+import Panjar from './Panjar'
 
 export default class Form extends BaseModel {
   public static table = 'forms'
@@ -150,6 +152,12 @@ export default class Form extends BaseModel {
 
   @hasOne(()=> BteLuarNegeri,{foreignKey: 'spdk_id',})
   public bteLuarNegeri: HasOne<typeof BteLuarNegeri>
+
+  @hasOne(()=> DpLuarNegeri,{foreignKey: 'spdk_id',})
+  public dpLuarNegeri: HasOne<typeof DpLuarNegeri>
+
+  @hasOne(()=> Panjar,{foreignKey: 'spdk_id',})
+  public panjar: HasOne<typeof Panjar>
 
   @hasMany(() => Destination,{foreignKey: 'forms_id',})
   public destinations: HasMany<typeof Destination>

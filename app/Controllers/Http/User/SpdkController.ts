@@ -21,6 +21,8 @@ export default class SpdkController {
         .where('user_id', userData.sub)
         .orderBy('created_at', 'desc')
         .preload('bteLuarNegeri')
+        .preload('dpLuarNegeri')
+        .preload('panjar')
         .preload('destinations')
         .preload('user', (userQuery) => {
           userQuery.preload('div')
@@ -311,9 +313,11 @@ export default class SpdkController {
         .to(pemberiTugas.email)
         .subject('Meetrip Notification')
         .priority('high')
-        .htmlView('emails/welcome', {
-          user: userData,
-          pemberiTugas: pemberiTugas,
+        .htmlView('emails/approve_bto', {
+          username: userData.name,
+          userHP: userData.no_hp,
+          userPosition: userData.jabatan,
+          pemberiTugas: pemberiTugas.name,
           tgl_berangkat: request.input('tgl_berangkat'),
           tgl_kembali: request.input('tgl_kembali'),
           url: Env.get('URL_FE_PORTAL'),
