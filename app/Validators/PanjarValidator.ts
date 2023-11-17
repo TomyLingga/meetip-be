@@ -5,13 +5,14 @@ export default class PanjarValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    user_id: schema.number(),
-    spdk_id: schema.number(),
-    official: schema.number(),
+    // user_id: schema.number(),
+    // spdk_id: schema.number(),
+    kurs_usd: schema.number(),
     sarapan: schema.number(),
     makan_siang: schema.number(),
     makan_malam: schema.number(),
     saku: schema.number(),
+    official: schema.number(),
     dualima: schema.number(),
     seratussatu: schema.number(),
     duaratus: schema.number(),

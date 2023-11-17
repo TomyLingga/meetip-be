@@ -36,5 +36,11 @@ Route.group(() => {
   //Form
   Route.get('/my-spdk', 'User/SpdkController.indexByUser')
   Route.post('/my-spdk/add', 'User/SpdkController.create')
+  Route.put('/my-spdk/update/:id', 'User/SpdkController.update')
+  Route.put('/my-spdk/cancel/:id', 'User/SpdkController.cancel')
+
+  //DP
+  Route.post('/downpayment/add/:id', 'User/PanjarsController.create')
+  Route.put('/downpayment/update/:id', 'User/PanjarsController.update')
 
 }).middleware('user')

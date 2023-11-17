@@ -5,6 +5,7 @@ import Destination from './Destination'
 import User from './User'
 import DpLuarNegeri from './DpLuarNegeri'
 import Panjar from './Panjar'
+import SpdkLog from './SpdkLog'
 
 export default class Form extends BaseModel {
   public static table = 'forms'
@@ -130,7 +131,7 @@ export default class Form extends BaseModel {
   public note: string
 
   @column({})
-  public status: string
+  public status: number
 
   @column({})
   public darurat: number
@@ -161,6 +162,9 @@ export default class Form extends BaseModel {
 
   @hasMany(() => Destination,{foreignKey: 'forms_id',})
   public destinations: HasMany<typeof Destination>
+
+  @hasMany(() => SpdkLog,{foreignKey: 'user_id',})
+  public log: HasMany<typeof SpdkLog>
 
   @belongsTo(()=> User,{foreignKey: 'user_id',})
   public user: BelongsTo<typeof User>

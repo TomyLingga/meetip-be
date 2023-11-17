@@ -1,7 +1,7 @@
 import { schema } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class FormValidator {
+export default class FormUpdateValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
@@ -19,7 +19,7 @@ export default class FormValidator {
     // wilayah: schema.string(),
     uang_panjar: schema.number(),
     lama_hari: schema.number(),
-    lampiran: schema.file(),
+    // lampiran: schema.file(),
     longitude: schema.array().members(schema.string()),
     latitude: schema.array().members(schema.string()),
     start_longitude: schema.string(),
