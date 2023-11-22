@@ -41,6 +41,52 @@ export default class SpdkController {
           logQuery.orderBy('created_at', 'asc')
         })
 
+      if (data.length === 0) {
+        throw new Error('No data found');
+      }
+      return response.send({
+        success: true,
+        data: data,
+      }, 200)
+    } catch (error) {
+      return response.send({
+        success: false,
+        msg: error.message,
+      }, 403)
+    }
+  }
+
+  public async detailByUser({ request, response, params }) {
+    const userData = request['decoded']
+    try {
+      const data = await Form.query()
+        .where('id', params.id)
+        .where('user_id', userData.sub)
+        .orderBy('created_at', 'desc')
+        .preload('bteLuarNegeri')
+        .preload('dpLuarNegeri')
+        .preload('panjar')
+        .preload('destinations')
+        .preload('user', (userQuery) => {
+          userQuery.preload('div')
+          userQuery.preload('dept')
+        })
+        .preload('pemberiTugas', (userQuery) => {
+          userQuery.preload('div')
+          userQuery.preload('dept')
+        })
+        .preload('atasan', (userQuery) => {
+          userQuery.preload('div')
+          userQuery.preload('dept')
+        })
+        .preload('log', (logQuery) => {
+          logQuery.orderBy('created_at', 'asc')
+        })
+
+      if (data.length === 0) {
+        throw new Error('No data found');
+      }
+
       return response.send({
         success: true,
         data: data,

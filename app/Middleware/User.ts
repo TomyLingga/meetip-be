@@ -5,7 +5,7 @@ import axios from 'axios'
 
 export default class User {
   public async handle({ request, response }: HttpContextContract, next: () => Promise<void>) {
-    // try {
+    try {
       const authorizationHeader = request.header('Authorization')
 
       if (!authorizationHeader || !authorizationHeader.startsWith('Bearer ')) {
@@ -24,8 +24,10 @@ export default class User {
         },
       })
 
-      if (!getAkses.data || getAkses.data.level_akses < 1) {
-        return response.status(401).json({ error: 'Unauthorized' })
+      const levelAkses = getAkses.data.data.level_akses
+
+      if (levelAkses < 1) {
+        return response.status(401).json({ error: 'Unauthorized/Not enough level Access' });
       }
 
       if (Math.floor(Date.now() / 1000) >= decoded.exp) {
@@ -36,9 +38,9 @@ export default class User {
       request['decoded'] = decoded
 
       await next()
-    // } catch (error) {
-    //   console.error(error)
-    //   return response.status(401).json({ error, message: 'Invalid or expired token' })
-    // }
+    } catch (error) {
+      console.error(error)
+      return response.status(401).json({ error, message: 'Invalid or expired token' })
+    }
   }
 }

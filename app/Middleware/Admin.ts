@@ -5,7 +5,6 @@ import axios from 'axios';
 
 export default class Admin {
   public async handle({request, response}: HttpContextContract, next: () => Promise<void>) {
-    // code for middleware goes here. ABOVE THE NEXT CALL
     try {
       const authorizationHeader = request.header('Authorization');
 
@@ -25,8 +24,10 @@ export default class Admin {
         },
       });
 
-      if (!getAkses.data || getAkses.data.level_akses < 9) {
-        return response.status(401).json({ error: 'Unauthorized' });
+      const levelAkses = getAkses.data.data.level_akses
+
+      if (levelAkses < 9) {
+        return response.status(401).json({ error: 'Unauthorized/Not enough level Access' });
       }
 
       if (Math.floor(Date.now() / 1000) >= decoded.exp) {
