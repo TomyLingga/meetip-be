@@ -42,5 +42,6 @@ Route.group(() => {
   //DP
   Route.post('/downpayment/add/:id', 'User/PanjarsController.create')
   Route.put('/downpayment/update/:id', 'User/PanjarsController.update')
+  Route.get('/downpayment/submit/:id', 'User/PanjarsController.submit')
 
 }).middleware('user')

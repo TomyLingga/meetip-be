@@ -97,8 +97,8 @@ export default class PanjarsController {
     try {
       await request.validate(PanjarValidator)
       const userData = request['decoded']
-      const panjar = await Panjar.findOrFail(params.id)
-      const form = await Form.findOrFail(panjar.spdk_id)
+      const form = await Form.findOrFail(params.id)
+      // const panjar = await Panjar.findOrFail(params.id)
 
       if (form.status < 300) {
         throw new Error('Cannot edit DP if status below 300. Current status : '+ form.status)
@@ -120,27 +120,29 @@ export default class PanjarsController {
         parseFloat(request.input('komunikasi') || 0) +
         parseFloat(request.input('airport') || 0)
 
-      panjar.merge({
-        kurs_usd: request.input('kurs_usd'),
-        sarapan: request.input('sarapan'),
-        makan_siang: request.input('makan_siang'),
-        makan_malam: request.input('makan_malam'),
-        saku: request.input('saku'),
-        official: request.input('official'),
-        dualima: request.input('dualima'),
-        seratussatu: request.input('seratussatu'),
-        duaratus: request.input('duaratus'),
-        hotel: request.input('hotel'),
-        laundry: request.input('laundry'),
-        transport_dilokasi: request.input('transport_dilokasi'),
-        tiket: request.input('tiket'),
-        komunikasi: request.input('komunikasi'),
-        airport: request.input('airport'),
-        total_panjar: total_panjar,
-      })
+      await Panjar.query({ client: trx })
+                  .where('spdk_id', form.id)
+                  .update({
+                    kurs_usd: request.input('kurs_usd'),
+                    sarapan: request.input('sarapan'),
+                    makan_siang: request.input('makan_siang'),
+                    makan_malam: request.input('makan_malam'),
+                    saku: request.input('saku'),
+                    official: request.input('official'),
+                    dualima: request.input('dualima'),
+                    seratussatu: request.input('seratussatu'),
+                    duaratus: request.input('duaratus'),
+                    hotel: request.input('hotel'),
+                    laundry: request.input('laundry'),
+                    transport_dilokasi: request.input('transport_dilokasi'),
+                    tiket: request.input('tiket'),
+                    komunikasi: request.input('komunikasi'),
+                    airport: request.input('airport'),
+                    total_panjar: total_panjar,
+                  })
 
-      panjar.useTransaction(trx)
-      await panjar.save()
+      // panjar.useTransaction(trx)
+      // await panjar.save()
 
       await form.related('log').create({
         user_id: userData.sub,
@@ -152,12 +154,51 @@ export default class PanjarsController {
       await trx.commit()
       return response.send({
         success: true,
-        data: panjar
       }, 200)
 
     } catch (error) {
       await trx.rollback()
       const mistake = error.messages ? error.messages : error.message
+      return response.status(500).json({
+        success: false,
+        errors: mistake,
+        stack: error.stack,
+      })
+    }
+  }
+
+  public async submit({response, params, request}){
+    const trx = await Database.transaction()
+
+    try {
+
+      const data = await Form.findOrFail(params.id)
+      const userData = request['decoded']
+
+      data.merge({
+        status: 302,
+        info: 'Pengecekan panjar oleh Administrator',
+      })
+
+      data.useTransaction(trx)
+      await data.save()
+
+      await data.related('log').create({
+        user_id: userData.sub,
+        spdk_id: data.id,
+        action: 'SUBMIT DP',
+        info: '-',
+      })
+
+      await trx.commit()
+
+      return response.send({
+        success: true,
+      }, 200)
+    } catch (error) {
+      await trx.rollback()
+      const mistake = error.messages ? error.messages : error.message
+
       return response.status(500).json({
         success: false,
         errors: mistake,
