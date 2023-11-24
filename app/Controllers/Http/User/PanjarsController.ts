@@ -121,25 +121,25 @@ export default class PanjarsController {
         parseFloat(request.input('airport') || 0)
 
       await Panjar.query({ client: trx })
-                  .where('spdk_id', form.id)
-                  .update({
-                    kurs_usd: request.input('kurs_usd'),
-                    sarapan: request.input('sarapan'),
-                    makan_siang: request.input('makan_siang'),
-                    makan_malam: request.input('makan_malam'),
-                    saku: request.input('saku'),
-                    official: request.input('official'),
-                    dualima: request.input('dualima'),
-                    seratussatu: request.input('seratussatu'),
-                    duaratus: request.input('duaratus'),
-                    hotel: request.input('hotel'),
-                    laundry: request.input('laundry'),
-                    transport_dilokasi: request.input('transport_dilokasi'),
-                    tiket: request.input('tiket'),
-                    komunikasi: request.input('komunikasi'),
-                    airport: request.input('airport'),
-                    total_panjar: total_panjar,
-                  })
+              .where('spdk_id', form.id)
+              .update({
+                kurs_usd: request.input('kurs_usd'),
+                sarapan: request.input('sarapan'),
+                makan_siang: request.input('makan_siang'),
+                makan_malam: request.input('makan_malam'),
+                saku: request.input('saku'),
+                official: request.input('official'),
+                dualima: request.input('dualima'),
+                seratussatu: request.input('seratussatu'),
+                duaratus: request.input('duaratus'),
+                hotel: request.input('hotel'),
+                laundry: request.input('laundry'),
+                transport_dilokasi: request.input('transport_dilokasi'),
+                tiket: request.input('tiket'),
+                komunikasi: request.input('komunikasi'),
+                airport: request.input('airport'),
+                total_panjar: total_panjar,
+              })
 
       // panjar.useTransaction(trx)
       // await panjar.save()

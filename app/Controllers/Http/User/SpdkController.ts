@@ -37,9 +37,9 @@ export default class SpdkController {
           userQuery.preload('div')
           userQuery.preload('dept')
         })
-        .preload('log', (logQuery) => {
-          logQuery.orderBy('created_at', 'asc')
-        })
+        // .preload('log', (logQuery) => {
+        //   logQuery.orderBy('created_at', 'asc')
+        // })
 
       if (data.length === 0) {
         throw new Error('No data found');
@@ -56,12 +56,10 @@ export default class SpdkController {
     }
   }
 
-  public async detailByUser({ request, response, params }) {
-    const userData = request['decoded']
+  public async detailByUser({ response, params }) {
     try {
       const data = await Form.query()
         .where('id', params.id)
-        .where('user_id', userData.sub)
         .orderBy('created_at', 'desc')
         .preload('bteLuarNegeri')
         .preload('dpLuarNegeri')
@@ -80,6 +78,7 @@ export default class SpdkController {
           userQuery.preload('dept')
         })
         .preload('log', (logQuery) => {
+          // logQuery.preload('user')
           logQuery.orderBy('created_at', 'asc')
         })
 

@@ -4,10 +4,13 @@ import Database from "@ioc:Adonis/Lucid/Database"
 import Form from "App/Models/Form"
 import FormCancelValidator from "App/Validators/FormCancelValidator"
 
-export default class FormsAdminController {
-  public async index({ response }) {
+export default class BtosController {
+  // pemberi tugas
+  public async indexPemberiTugas({response, request}){
+    const userData = request['decoded']
     try {
       const data = await Form.query()
+        .where('atasan_id', userData.sub)
         .orderBy('created_at', 'desc')
         .preload('bteLuarNegeri')
         .preload('dpLuarNegeri')
@@ -25,10 +28,13 @@ export default class FormsAdminController {
           userQuery.preload('div')
           userQuery.preload('dept')
         })
-        // .preload('log', (logQuery) => {
-        //   logQuery.orderBy('created_at', 'asc')
-        // })
+        .preload('log', (logQuery) => {
+          logQuery.orderBy('created_at', 'asc')
+        })
 
+      if (data.length === 0) {
+        throw new Error('No data found');
+      }
       return response.send({
         success: true,
         data: data,
@@ -41,7 +47,7 @@ export default class FormsAdminController {
     }
   }
 
-  public async approvePanjar({ response, params, request }) {
+  public async approveBto({ response, params, request }) {
     const trx = await Database.transaction();
 
     try {
@@ -55,9 +61,13 @@ export default class FormsAdminController {
 
       const userData = request['decoded'];
 
+      if (userData.sub != data.atasan_id) {
+        throw new Error('Not the assignor')
+      }
+
       data.merge({
-        status: 1,
-        info: 'Menunggu persetujuan dari ' + data.pemberiTugas.name,
+        status: 2,
+        info: 'Menunggu persetujuan dari Departemen HC',
       });
 
       await data.save();
@@ -65,7 +75,7 @@ export default class FormsAdminController {
       await data.related('log').create({
         user_id: userData.sub,
         spdk_id: data.id,
-        action: 'APPROVE DP',
+        action: 'APPROVE BTO',
         info: '-',
       });
 
@@ -86,7 +96,7 @@ export default class FormsAdminController {
     }
   }
 
-  public async revisiPanjar({response, request, params}){
+  public async declineBto({response, request, params}){
     const trx = await Database.transaction()
 
     try {
@@ -95,10 +105,17 @@ export default class FormsAdminController {
       const data = await Form.findOrFail(params.id)
 
       const userData = request['decoded']
+      let status = 0
+      let info = "Ditolak oleh " + userData.name + ", Tidak ada Panjar"
+
+      if (data.uang_panjar > 0) {
+        status = 100
+        info = "Ditolak oleh " + userData.name + ", Panjar belum dikembalikan"
+      }
 
       data.merge({
-        status: 303,
-        info: "Revisi Panjar",
+        status: status,
+        info: info,
         note: request.input('keterangan'),
       })
 
@@ -108,7 +125,7 @@ export default class FormsAdminController {
       await data.related('log').create({
         user_id: userData.sub,
         spdk_id: data.id,
-        action: 'REVISION DP',
+        action: 'DECLINE BTO',
         info: request.input('keterangan'),
       })
 

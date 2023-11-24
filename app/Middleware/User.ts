@@ -26,8 +26,12 @@ export default class User {
 
       const levelAkses = getAkses.data.data.level_akses
 
+      if (levelAkses == null) {
+        return response.status(401).json({ error: 'Unauthorized' });
+      }
+
       if (levelAkses < 1) {
-        return response.status(401).json({ error: 'Unauthorized/Not enough level Access' });
+        return response.status(401).json({ error: 'Not enough level Access' });
       }
 
       if (Math.floor(Date.now() / 1000) >= decoded.exp) {

@@ -26,6 +26,10 @@ export default class HumanCapital {
 
       const levelAkses = getAkses.data.data.level_akses
 
+      if (levelAkses == null) {
+        return response.status(401).json({ error: 'Unauthorized' });
+      }
+
       if (levelAkses < 5) {
         return response.status(401).json({ error: 'Unauthorized/Not enough level Access' });
       }

@@ -33,9 +33,14 @@ Route.group(() => {
   Route.get('/uang/wilayah/:wilayah/level/:jabatan', 'Misc/UangsController.showByJabatanWilayah')
   Route.put('/uang/:id/update', 'Misc/UangsController.update')
 
+  //Pemberi Tugas
+  Route.get('/assignor/index', 'User/BtosController.indexPemberiTugas')
+  Route.get('/assignor/approve/:id', 'User/BtosController.approveBto')
+  Route.put('/assignor/decline/:id', 'User/BtosController.declineBto')
+
   //Form
   Route.get('/my-spdk', 'User/SpdkController.indexByUser')
-  Route.get('/my-spdk/detail/:id', 'User/SpdkController.detailByUser')
+  Route.get('/index-spdk/detail/:id', 'User/SpdkController.detailByUser')
   Route.post('/my-spdk/add', 'User/SpdkController.create')
   Route.put('/my-spdk/update/:id', 'User/SpdkController.update')
   Route.put('/my-spdk/cancel/:id', 'User/SpdkController.cancel')
@@ -49,6 +54,14 @@ Route.group(() => {
 
 Route.group(() => {
   //Form
-  Route.get('/testingbro', 'Admin/FormsAdminController.index')
+  Route.get('/index-spdk', 'Admin/FormsAdminController.index')
+
+}).middleware('hc')
+
+Route.group(() => {
+
+  //Panjar
+  Route.get('/panjar-spdk/approve/:id', 'Admin/FormsAdminController.approvePanjar')
+  Route.put('/panjar-spdk/revisi/:id', 'Admin/FormsAdminController.revisiPanjar')
 
 }).middleware('admin')
