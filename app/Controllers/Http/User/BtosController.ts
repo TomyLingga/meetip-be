@@ -61,6 +61,10 @@ export default class BtosController {
 
       const userData = request['decoded'];
 
+      if (data.status != 1) {
+        throw new Error('Cant approve if status not 1, current status '+data.status)
+      }
+
       if (userData.sub != data.atasan_id) {
         throw new Error('Not the assignor')
       }
@@ -105,6 +109,15 @@ export default class BtosController {
       const data = await Form.findOrFail(params.id)
 
       const userData = request['decoded']
+
+      if (userData.sub != data.atasan_id) {
+        throw new Error('Not the assignor')
+      }
+
+      if (data.status != 1) {
+        throw new Error('Cant decline if status not 1, current status '+data.status)
+      }
+
       let status = 0
       let info = "Ditolak oleh " + userData.name + ", Tidak ada Panjar"
 

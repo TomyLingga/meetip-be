@@ -5,7 +5,6 @@ import Form from "App/Models/Form"
 import FormCancelValidator from "App/Validators/FormCancelValidator";
 
 export default class HcBtosController {
-
   public async approveBto({ response, params, request }) {
     const trx = await Database.transaction();
 
@@ -20,9 +19,13 @@ export default class HcBtosController {
 
       const userData = request['decoded'];
 
+      if (data.status != 2) {
+        throw new Error('Cant approve if status not 2, current status '+data.status)
+      }
+
       data.merge({
         status: 3,
-        info: 'Proses pembuatan Surat Jalan oleh Administrator',
+        info: 'Sedang diproses Administrator MeeTrip',
       });
 
       await data.save();
@@ -60,6 +63,11 @@ export default class HcBtosController {
       const data = await Form.findOrFail(params.id)
 
       const userData = request['decoded']
+
+      if (data.status != 2) {
+        throw new Error('Cant decline if status not 2, current status '+data.status)
+      }
+
       let status = 0
       let info = "Ditolak oleh " + userData.name + ", Tidak ada Panjar"
 

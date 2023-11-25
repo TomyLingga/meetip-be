@@ -177,7 +177,7 @@ export default class PanjarsController {
 
       data.merge({
         status: 302,
-        info: 'Pengecekan panjar oleh Administrator',
+        info: 'Pengecekan panjar oleh Administrator MeeTrip',
       })
 
       data.useTransaction(trx)

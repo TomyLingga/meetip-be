@@ -13,6 +13,7 @@ import Mail from '@ioc:Adonis/Addons/Mail'
 import Division from 'App/Models/Division'
 import FormUpdateValidator from 'App/Validators/FormUpdateValidator'
 import FormCancelValidator from 'App/Validators/FormCancelValidator'
+import Drive from '@ioc:Adonis/Core/Drive'
 
 export default class SpdkController {
   public async indexByUser({ request, response }) {
@@ -80,12 +81,15 @@ export default class SpdkController {
         .preload('log', (logQuery) => {
           // logQuery.preload('user')
           logQuery.orderBy('created_at', 'asc')
-        })
+        }).firstOrFail()
 
-      if (data.length === 0) {
+      if (data === null) {
         throw new Error('No data found');
       }
+      // data.lampiran = Application.tmpPath(await Drive.getUrl(`lampiran/${data.lampiran}`))
+      data.lampiran = await Drive.getUrl(`lampiran/${data.lampiran}`)
 
+      // data.lampiran = `./uploads/lampiran/${data.lampiran}`
       return response.send({
         success: true,
         data: data,
@@ -278,7 +282,7 @@ export default class SpdkController {
       }
 
       const fileName = `${new Date().getTime()}_${lampiranFile.clientName}`
-      await lampiranFile.move(Application.tmpPath('uploads/lampiran'), { name: fileName })
+      await lampiranFile.move("./public/uploads/lampiran", { name: fileName })
 
       if (lampiranFile.state != 'moved') {
         return lampiranFile.error()

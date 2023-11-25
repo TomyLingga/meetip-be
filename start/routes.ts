@@ -51,6 +51,11 @@ Route.group(() => {
   Route.get('/downpayment/submit/:id', 'User/PanjarsController.submit')
 
 }).middleware('user')
+Route.get('/pdf/dpregion/:id', 'Misc/PdfsController.generate').as('pdf.dpregion')
+Route.get('/pdf/showDpRegion/:id', 'Misc/PdfsController.showDpRegion')
+
+//Lampiran
+Route.get('/spdk/:filename/lampiran', 'Misc/PdfsController.showLampiran')
 
 Route.group(() => {
   //Form
