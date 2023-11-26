@@ -38,9 +38,6 @@ export default class SpdkController {
           userQuery.preload('div')
           userQuery.preload('dept')
         })
-        // .preload('log', (logQuery) => {
-        //   logQuery.orderBy('created_at', 'asc')
-        // })
 
       if (data.length === 0) {
         throw new Error('No data found');
@@ -79,17 +76,14 @@ export default class SpdkController {
           userQuery.preload('dept')
         })
         .preload('log', (logQuery) => {
-          // logQuery.preload('user')
           logQuery.orderBy('created_at', 'asc')
         }).firstOrFail()
 
       if (data === null) {
         throw new Error('No data found');
       }
-      // data.lampiran = Application.tmpPath(await Drive.getUrl(`lampiran/${data.lampiran}`))
       data.lampiran = await Drive.getUrl(`lampiran/${data.lampiran}`)
 
-      // data.lampiran = `./uploads/lampiran/${data.lampiran}`
       return response.send({
         success: true,
         data: data,

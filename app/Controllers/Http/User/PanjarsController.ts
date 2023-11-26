@@ -141,9 +141,6 @@ export default class PanjarsController {
                 total_panjar: total_panjar,
               })
 
-      // panjar.useTransaction(trx)
-      // await panjar.save()
-
       await form.related('log').create({
         user_id: userData.sub,
         spdk_id: form.id,

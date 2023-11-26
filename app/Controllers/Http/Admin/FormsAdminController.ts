@@ -25,9 +25,6 @@ export default class FormsAdminController {
           userQuery.preload('div')
           userQuery.preload('dept')
         })
-        // .preload('log', (logQuery) => {
-        //   logQuery.orderBy('created_at', 'asc')
-        // })
 
       return response.send({
         success: true,
