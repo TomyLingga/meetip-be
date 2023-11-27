@@ -1,6 +1,7 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Database from "@ioc:Adonis/Lucid/Database";
+import DpLuarNegeri from "App/Models/DpLuarNegeri";
 import Form from "App/Models/Form";
 import Panjar from "App/Models/Panjar";
 import PanjarValidator from "App/Validators/PanjarValidator";
@@ -42,26 +43,53 @@ export default class PanjarsController {
         parseFloat(request.input('komunikasi') || 0) +
         parseFloat(request.input('airport') || 0)
 
-      const newPanjar = await Panjar.create({
-        user_id: form.user_id,
-        spdk_id: form.id,
-        kurs_usd: request.input('kurs_usd'),
-        sarapan: request.input('sarapan'),
-        makan_siang: request.input('makan_siang'),
-        makan_malam: request.input('makan_malam'),
-        saku: request.input('saku'),
-        official: request.input('official'),
-        dualima: request.input('dualima'),
-        seratussatu: request.input('seratussatu'),
-        duaratus: request.input('duaratus'),
-        hotel: request.input('hotel'),
-        laundry: request.input('laundry'),
-        transport_dilokasi: request.input('transport_dilokasi'),
-        tiket: request.input('tiket'),
-        komunikasi: request.input('komunikasi'),
-        airport: request.input('airport'),
-        total_panjar: total_panjar,
-      })
+      let newPanjar;
+
+      if (form.wilayah == '3') {
+        newPanjar = await DpLuarNegeri.create({
+          user_id: form.user_id,
+          spdk_id: form.id,
+          kurs_usd: request.input('kurs_usd'),
+          sarapan: request.input('sarapan'),
+          makan_siang: request.input('makan_siang'),
+          makan_malam: request.input('makan_malam'),
+          saku: request.input('saku'),
+          official: request.input('official'),
+          dualima: request.input('dualima'),
+          seratussatu: request.input('seratussatu'),
+          duaratus: request.input('duaratus'),
+          hotel: request.input('hotel'),
+          laundry: request.input('laundry'),
+          transport_dilokasi: request.input('transport_dilokasi'),
+          tiket: request.input('tiket'),
+          komunikasi: request.input('komunikasi'),
+          airport: request.input('airport'),
+          total_panjar: total_panjar,
+        })
+
+      } else {
+        newPanjar = await Panjar.create({
+          user_id: form.user_id,
+          spdk_id: form.id,
+          kurs_usd: request.input('kurs_usd'),
+          sarapan: request.input('sarapan'),
+          makan_siang: request.input('makan_siang'),
+          makan_malam: request.input('makan_malam'),
+          saku: request.input('saku'),
+          official: request.input('official'),
+          dualima: request.input('dualima'),
+          seratussatu: request.input('seratussatu'),
+          duaratus: request.input('duaratus'),
+          hotel: request.input('hotel'),
+          laundry: request.input('laundry'),
+          transport_dilokasi: request.input('transport_dilokasi'),
+          tiket: request.input('tiket'),
+          komunikasi: request.input('komunikasi'),
+          airport: request.input('airport'),
+          total_panjar: total_panjar,
+        })
+
+      }
 
       newPanjar.useTransaction(trx)
       await newPanjar.save()
@@ -203,6 +231,4 @@ export default class PanjarsController {
       })
     }
   }
-
-  public async exportDp({}){}
 }

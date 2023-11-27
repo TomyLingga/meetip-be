@@ -53,9 +53,17 @@ export default class BtosController {
     try {
       const data = await Form.query()
         .where('id', params.id)
+        .preload('user', (userQuery) => {
+          userQuery.preload('div')
+          userQuery.preload('dept')
+        })
         .preload('pemberiTugas', (userQuery) => {
-          userQuery.preload('div');
-          userQuery.preload('dept');
+          userQuery.preload('div')
+          userQuery.preload('dept')
+        })
+        .preload('atasan', (userQuery) => {
+          userQuery.preload('div')
+          userQuery.preload('dept')
         })
         .firstOrFail();
 
