@@ -218,6 +218,7 @@ export default class FormsAdminController {
       const userData = request['decoded']
       let status, info
 
+      console.log(data.atasan)
       if (data.atasan_id == data.teruskan) {
         status = 6
         info = "Silahkan Cetak"
@@ -239,13 +240,14 @@ export default class FormsAdminController {
             tgl_berangkat: request.input('tgl_berangkat'),
             tgl_kembali: request.input('tgl_kembali'),
             url: Env.get('URL_FE_PORTAL'),
+            jenis: 'SPDK',
           })
         })
       }
 
       data.merge({
-        status: 1,
-        info: 'Menunggu persetujuan dari ' + data.pemberiTugas.name,
+        status: status,
+        info: info,
       })
 
       await data.save()
@@ -261,6 +263,7 @@ export default class FormsAdminController {
 
       return response.send({
         success: true,
+        data
       }, 200)
     } catch (error) {
       await trx.rollback()

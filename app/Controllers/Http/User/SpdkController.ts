@@ -210,6 +210,7 @@ export default class SpdkController {
           tgl_berangkat: request.input('tgl_berangkat'),
           tgl_kembali: request.input('tgl_kembali'),
           url: Env.get('URL_FE_PORTAL'),
+          jenis: 'BTO',
         })
       })
     } else {

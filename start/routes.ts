@@ -50,16 +50,12 @@ Route.group(() => {
   Route.put('/downpayment/update/:id', 'User/PanjarsController.update')
   Route.get('/downpayment/submit/:id', 'User/PanjarsController.submit')
 
+  //Teruskan
+  Route.get('/superior/index', 'Manager/SuratsController.indexTeruskan')
+  Route.get('/superior/approve/:id', 'Manager/SuratsController.approveSpdk')
+  Route.put('/superior/decline/:id', 'Manager/SuratsController.declineSpdk')
+
 }).middleware('user')
-
-Route.get('/pdf/dpregion/:id', 'Misc/PdfsController.generateDpRegion').as('pdf.dpregion')
-Route.get('/pdf/:id/pengajuan-panjar-dalam-negeri', 'Misc/PdfsController.showDpRegion')
-
-Route.get('/pdf/dpoutregion/:id', 'Misc/PdfsController.generateDpOutregion').as('pdf.dpoutregion')
-Route.get('/pdf/:id/pengajuan-panjar-luar-negeri', 'Misc/PdfsController.showDpOutregion')
-
-//Lampiran
-// Route.get('/spdk/:filename/lampiran', 'Misc/PdfsController.showLampiran')
 
 Route.group(() => {
   //Form
@@ -75,5 +71,15 @@ Route.group(() => {
 
   //SPDK
   Route.put('/surat-spdk/create/:id', 'Admin/FormsAdminController.createSurat')
+  Route.put('/surat-spdk/submit/:id', 'Admin/FormsAdminController.submitSurat')
 
 }).middleware('admin')
+
+Route.get('/pdf/dpregion/:id', 'Misc/PdfsController.generateDpRegion').as('pdf.dpregion')
+Route.get('/pdf/:id/pengajuan-panjar-dalam-negeri', 'Misc/PdfsController.showDpRegion')
+
+Route.get('/pdf/dpoutregion/:id', 'Misc/PdfsController.generateDpOutregion').as('pdf.dpoutregion')
+Route.get('/pdf/:id/pengajuan-panjar-luar-negeri', 'Misc/PdfsController.showDpOutregion')
+
+Route.get('/pdf/spdk/:id', 'Misc/PdfsController.generateSpdk').as('pdf.spdk')
+Route.get('/pdf/:id/perintah-perjalanan-dinas', 'Misc/PdfsController.showSpdk')
