@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{{--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">  --}}
+	<title>BTO</title>
+</head>
+<style type="text/css">
+	.under{
+		text-decoration: underline;
+	}
+	.font{
+    font-family:sans-serif;
+    font-size: 14px;
+    text-decoration: underline;
+    color: black;
+    margin-top:0px;
+	}
+	.bold{
+		font-weight: bold;
+	}
+    .tbl{
+        border: 2px solid black;
+        width: 100%;
+    }
+    .tdr{
+        border: 1px;
+        border-color: black;
+        border-right-style: solid;
+    }
+    .tdl{
+        border: 1px;
+        border-color: black;
+        border-left-style: solid;
+    }
+    .tdl2{
+        border: 1px;
+        border-color: black;
+        border-left-style: solid;
+        border-top-style: solid;
+        margin-top: 2px;
+        /* text-align: center; */
+    }
+    .tdl3{
+		    border: none;
+        /* text-align: center; */
+    }
+    .tbl2{
+        border: 4px;
+        width: 100%;
+        /* padding: 10px; */
+        border-style: solid;
+    }
+    .tbl3{
+        width: 99%;
+        /* padding: 11px; */
+        margin:7px;
+    }
+    .tr{
+        border: 2px;
+        width: 100%;
+        /* padding: 0; */
+        border-style: solid;
+        margin:2px;
+    }
+    .tr2{
+        border:1px;
+        border-style: solid;
+        padding: 5px;
+    }
+    .tx-center{
+        text-align:center;
+    }
+    .ft2{
+        font-size: 11px;
+        color: black;
+		    font-family:sans-serif;
+        margin: 0;
+    }
+    .ft3{
+        font-family:sans-serif;
+		    font-size: 13px;
+        /* text-decoration: underline; */
+		    color: black;
+        /* margin-top:20px; */
+    }
+    .border{
+        border: 3px solid black;
+        /* width:100%; */
+    }
+    br {
+        display: block;
+        margin: 2 0;
+    }
+</style>
+<body style="margin: 25px 15px 0px 30px;">
+	<!-- <div> -->
+		<table class="tbl" style="">
+			<tr>
+				<td class="tdr tx-center" rowspan="2" width="13%">
+					<img src="/assets/inl.png" style="margin-top:25;" width="85">
+				</td>
+        <td class="tx-center" width="">
+            <b class="font">PT. INDUSTRI NABATI LESTARI</b>
+            <p class="ft2"><b >PABRIK MINYAK GORENG</b></p>
+            <p class="ft2"><b> Kantor Pusat : Komp. KEK Sei Mangkei, Kav.2-3, Kec. Bosar Maligas,</b></p>
+            <p class="ft2"><b> Kab. Simalungun,</b></p>
+            <p class="ft2"><b> Sumatera Utara, 21184</b></p>
+        </td>
+				<td class="tdl tx-center" style="font-size:11px;" width="18%">
+          <b>No. Dokumen</b>
+					<p>INLHO/HRD-F/017</p>
+        </td>
+				<td class="tdl tx-center" style="font-size:11px;" width="15%">
+          <b>Tgl. Berlaku</b>
+					<p>12-Nov-18</p>
+        </td>
+			</tr>
+      <tr>
+        <td class="tx-center" style="border: 1px; border-color: black; border-top-style: solid;">
+          <b class="ft3">BUSINESS TRIP ORDER (BTO)</b>
+        </td>
+        <td class="tdl2 tx-center" style="font-size:11px;">
+          <b>No. Revisi</b>
+          <p>00</p>
+        </td>
+				<td class="tdl2 tx-center" style="font-size:11px;">
+          <b>Halaman</b>
+          <p>1 dari 1</p>
+        </td>
+			</tr>
+		</table>
+		<br>
+		<table class="tbl mt-1" style="">
+			<tr class="" style="font-size: 11px;">
+				<td width="8%"></td>
+				<td style="" width="20%">Nama Karyawan</td>
+				<td width="2%">: </td>
+				<td>{{form.user.name}}</td>
+				<td><div style="margin-bottom: 2em;"></div></td>
+			</tr>
+			<tr class="" style="font-size: 11px;">
+				<td></td>
+				<td>Jabatan</td>
+				<td width="2%">: </td>
+				<td>{{form.jabatan}}</td>
+				<td><div style="margin-bottom: 2em;"></div></td>
+			</tr>
+			<tr class="" style="font-size: 11px;">
+				<td></td>
+				<td>Departemen/Divisi</td>
+				<td width="2%">: </td>
+				<td>{{form.user.dept.department}} / {{form.user.div.divisi}}</td>
+				<td><div style="margin-bottom: 2em;"></div></td>
+			</tr>
+		</table>
+		<br>
+		<table class="tbl mt-1" style="">
+			<tr>
+				<td width="8%"></td>
+				<td style="" width="20%"></td>
+				<td width="2%"></td>
+				<td style="font-size: 14px;"><div style="margin-left: 8.5em; margin-bottom: 0.5em;"><b>DETAIL</b></div></td>
+				<td><div style="margin-bottom: 2em;"></div></td>
+			</tr>
+			<!-- <tr>RENCANA KEBUTUHAN TENAGA KERJA</tr> -->
+			<tr class="" style="font-size: 11px;">
+				<td width="8%"></td>
+				<td style="" width="20%">Tujuan</td>
+				<td width="2%">: </td>
+				<td>
+          <div style="display: flex;">
+            <div style="align-self: center; width:auto;"></div>
+            <div>
+              <ol style="margin: 0; padding-left: 18px;">
+                @each(locationName in locationNames)
+                <li>&nbsp; {{locationName}}</li>
+                @endeach
+              </ol>
+            </div>
+          </div>
+        </td>
+				<td><div style="margin-bottom: 2em;"></div></td>
+			</tr>
+			<tr class="" style="font-size: 11px;">
+				<td width="8%"></td>
+				<td style="" width="20%">Keperluan</td>
+				<td width="2%">: </td>
+				<td>{{form.keperluan}}</td>
+				<td><div style="margin-bottom: 2em;"></div></td>
+			</tr>
+			<tr class="" style="font-size: 11px;">
+				<td width="8%"></td>
+				<td style="" width="20%">Lama Perjalanan</td>
+				<td width="2%">: </td>
+				<td>{{ form.tgl_berangkat }} &nbsp; s/d &nbsp; {{ form.tgl_kembali }}</td>
+				<td><div style="margin-bottom: 2em;"></div></td>
+			</tr>
+			<tr class="" style="font-size: 11px;">
+				<td width="8%"></td>
+				<td style="" width="20%">Jarak Perjalanan</td>
+				<td width="2%">: </td>
+				<td>{{form.jarak}}</td>
+				<td><div style="margin-bottom: 2em;"></div></td>
+			</tr>
+			<tr class="" style="font-size: 11px;">
+				<td width="8%"></td>
+				<td style="" width="20%">Lama</td>
+				<td width="2%">: </td>
+				<td>{{form.lama_hari}} Hari</td>
+				<td><div style="margin-bottom: 2em;"></div></td>
+			</tr>
+			<tr class="" style="font-size: 11px;">
+				<td width="8%"></td>
+				<td style="" width="20%">Transport</td>
+				<td width="2%">: </td>
+				<td>{{form.kendaraan}}</td>
+				<td><div style="margin-bottom: 2em;"></div></td>
+			</tr>
+		</table>
+		<br>
+		<table class="tbl mt-1" style="">
+		  <tr class="" style="font-size: 11px;">
+				<td width="8%"></td>
+				<td width="" colspan="3">Diajukan Tanggal, {{form.created_at}}</td>
+			</tr>
+			<br>
+      	<tr>
+			<td width="8%"></td>
+			<td width="30%" style="text-align: center;">
+				<b style="font-size: 11px;">Pelaksana Tugas</b>
+			</td>
+			<td width="30%" style="text-align: center;">
+				<b style="font-size: 11px;">Pemberi Tugas</b>
+			</td>
+			<td width="30%" style="text-align: center;">
+				<b style="font-size: 11px;">Diketahui</b>
+			</td>
+      	</tr>
+			<tr class="">
+				<td width="8%"></td>
+				<td width="30%">
+					<center>
+						{{--  <p style="font-size: 11px;"><b>Pelaksana Tugas</b></p>  --}}
+						<img style="margin-top: 1em;" src="http://36.92.181.10:8081/storage/upload/ttd/{{form.user.signature}}" width="100">
+						<p><b style="font-size: 10px; text-decoration: underline; ">{{form.user.name}}</b></p>
+						<p style="margin-top: -0.9em;"><b style="font-size: 10px;">{{form.jabatan}}</b></p>
+					</center>
+				</td>
+				<td width="30%">
+					<center>
+						{{--  <p style="font-size: 11px;"><b>Pemberi Tugas</b></p>  --}}
+						@if(form.status > 1 && form.status <= 110)
+						<img style="margin-top: 1em;" src="http://36.92.181.10:8081/storage/upload/ttd/{{form.pemberiTugas.signature}}" width="100">
+						@else
+						<img style="margin-top: 1em;" src="http://36.92.181.10:8081/storage/upload/ttd/polos.png" width="100">
+						@endif
+            			<p><b style="font-size: 10px; text-decoration: underline;">{{form.pemberiTugas.name}}</b></p>
+						<p style="margin-top: -0.9em;"><b style="font-size: 10px;">{{form.pemberiTugas.jabatan}}</b></p>
+					</center>
+				</td>
+				<td width="30%">
+					<center>
+						{{--  <p style="font-size: 11px;"><b>Diketahui</b></p>  --}}
+						@if(form.status > 2 && form.status <= 110)
+						<img style="margin-top: 1em;" src="http://36.92.181.10:8081/storage/upload/ttd/default.png" width="100">
+						@else
+						<img style="margin-top: 1em;" src="http://36.92.181.10:8081/storage/upload/ttd/polos.png" width="100">
+						@endif
+						<p><b style="font-size: 10px; text-decoration: underline; ">Administrator-HC</b></p>
+						<p style="margin-top: -0.9em;"><b style="font-size: 10px;">Human Capital</b></p>
+					</center>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

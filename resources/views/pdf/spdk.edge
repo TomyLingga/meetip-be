@@ -17,21 +17,22 @@
 		font-weight: bold;
 	}
 </style>
-<body style="margin: -15px -26px 0px 0px;">
+<body style="margin: 25px 15px 0px 30px;">
 	<div class="mb-5">
 		<table width="100%">
 			<tr>
 				<td align="right">
-					<img src="storage/upload/surat/inl2.png" width="165">
+					<img src="/assets/inl2.png" width="165">
 				</td>
 			</tr>
 		</table>
 	</div>
 	<br>
 	<br>
-	<div class="mt-5" style="text-align: center;">
+	<div class="mt-5 mb-3" style="text-align: center;">
 		<strong class="under font bold">SURAT PERINTAH PERJALANAN DINAS KARYAWAN</strong>
-		<p class="font bold" style="margin:1.5; padding:1;">Nomor :{{$form->nomor_surat}}</p>
+    <br>
+		<span class="font bold" style="margin:1.5;">Nomor :{{form.nomor_surat}}</span>
 	</div>
 	<br>
 	<div class="">
@@ -43,90 +44,92 @@
 			</tr>
 		</table>
 	</div>
-	<?php
-	$bln = array(1=>'Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember');
-	?>
 	<div class="mb-4">
 		<table width="100%">
 			<tr class="font">
 				<td width="15%"></td>
 				<td width="5%">1.</td>
 				<td width="20%">Nama </td>
-				<td width="60%">: {{$form->nama_pelaksana}}</td>
+				<td width="60%">: {{form.user.name}}</td>
 			</tr>
-			@if($form->jabatan == 'Direktur Utama')
 			<tr class="font">
 				<td width="15%"></td>
 				<td width="5%">2.</td>
 				<td width="20%">Pangkat/Jabatan </td>
-				<td width="60%">: Direktur</td>
+				<td width="60%">: {{form.jabatan}}</td>
 			</tr>
-			@elseif($form->jabatan == 'General Manager')
-			<tr class="font">
-				<td width="15%"></td>
-				<td width="5%">2.</td>
-				<td width="20%">Pangkat/Jabatan </td>
-				<td width="60%">: {{$form->jabatan}} {{$form->divisi}}</td>
-			</tr>
-			@else
-			<tr class="font">
-				<td width="15%"></td>
-				<td width="5%">2.</td>
-				<td width="20%">Pangkat/Jabatan </td>
-				<td width="60%">: {{$form->jabatan}}</td>
-			</tr>
-			@endif
 			<tr class="font">
 				<td width="15%"></td>
 				<td width="5%">3.</td>
 				<td width="20%">Golongan </td>
-				<td width="60%">: - </td>
+        		@if (form.golongan == "1")
+				<td width="60%">: Junior Staff </td>
+				@elseif(form.golongan == "2")
+				<td width="60%">: Staff</td>
+				@elseif(form.golongan == "3")
+				<td width="60%">: Senior Staff</td>
+				@elseif(form.golongan == "4")
+				<td width="60%">: Executive</td>
+				@elseif(form.golongan == "5")
+				<td width="60%">: General Manager</td>
+				@elseif(form.golongan == "6")
+				<td width="60%">: SEVP</td>
+				@elseif(form.golongan == "7")
+				<td width="60%">: Direktur/Komisaris</td>
+				@endif
 			</tr>
 			<tr class="font">
 				<td width="15%"></td>
 				<td width="5%">4.</td>
 				<td width="20%">Untuk bertugas ke </td>
-				<td width="60%">: {{$form->tujuan}}</td>
+				<td width="60%">
+          <div style="display: flex;">
+            <div style="align-self: center; width:auto;">:</div>
+            <div>
+              <ol style="margin: 0; padding-left: 18px;">
+                @each(locationName in locationNames)
+                <li>&nbsp; {{locationName}}</li>
+                @endeach
+              </ol>
+            </div>
+          </div>
+        </td>
 			</tr>
 			<tr class="font">
 				<td width="15%"></td>
 				<td width="5%">5.</td>
 				<td width="20%">Keperluan/Urusan </td>
-				<td width="60%">: {{$form->keperluan}}</td>
+				<td width="60%">: {{form.keperluan}}</td>
 			</tr>
 			<tr class="font">
 				<td width="15%"></td>
 				<td width="5%">6.</td>
 				<td width="20%">Berangkat tanggal </td>
-				<td width="60%">: <?=date('j',strtotime($form->tgl_berangkat)).' '.$bln[date('n',strtotime($form->tgl_berangkat))].' '.date('Y',strtotime($form->tgl_berangkat));?></td>
+				<td width="60%">: {{form.tgl_berangkat}}</td>
 			</tr>
 			<tr class="font">
 				<td width="15%"></td>
 				<td width="5%">7.</td>
 				<td width="20%">Kembali tanggal </td>
-				<td width="60%">: <?=date('j',strtotime($form->tgl_kembali)).' '.$bln[date('n',strtotime($form->tgl_kembali))].' '.date('Y',strtotime($form->tgl_kembali));?></td>
+				<td width="60%">: {{form.tgl_kembali}}</td>
 			</tr>
 			<tr class="font">
 				<td width="15%"></td>
 				<td width="5%">8.</td>
 				<td width="20%">Barang yang dibawa </td>
-				<td width="60%">: {{$form->barang}}</td>
+				<td width="60%">: {{form.barang}}</td>
 			</tr>
 			<tr class="font">
 				<td width="15%"></td>
 				<td width="5%">9.</td>
 				<td width="20%">Kendaraan </td>
-				@if ($form->kendaraan == "Kendaraan Dinas")
-				<td width="60%">: Kendaraan Dinas {{$form->no_kendaraan}}</td>
-				@else
-				<td width="60%">: {{$form->kendaraan}}</td>
-				@endif
+				<td width="60%">: {{form.kendaraan}}</td>
 			</tr>
 			<tr class="font">
 				<td width="15%"></td>
 				<td width="5%">10.</td>
 				<td width="20%">Rombongan </td>
-				<td width="60%">: {{$form->nama_supir}}</td>
+				<td width="60%">: {{form.nama_supir}}</td>
 			</tr>
 		</table>
 	</div>
@@ -160,14 +163,6 @@
 		</table>
 	</div>
 	<br>
-	<?php
-
-	$bulan = date('n',strtotime($form->tgl_surat));
-	$tgl = date('j',strtotime($form->tgl_surat));
-	$thn = date('Y',strtotime($form->tgl_surat));
-	$tgl_surat = $tgl.' '.$bln[$bulan].' '.$thn;
-	?>
-
 <div class="mt-4 mb-4">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			<tr class="font">
@@ -218,23 +213,23 @@
 				<td width="10%" style="height: 120px;"></td>
 				<td width="35%" style="height: 120px; vertical-align: bottom;">
 					<table width="100%">
-						@if ($form->status >= 6)
+						@if (form.status >= 6 && form.status < 100)
 						<tr>
 							<td width="10%"></td>
-							<td width="60%" style="text-align:center; margin:0; padding:0;"><img src="storage/upload/ttd/{{$user->signature}}" width="100"></td>
+							<td width="60%" style="text-align:center; margin:0; padding:0;"><img src="http://36.92.181.10:8081/storage/upload/ttd/{{form.atasan.signature}}" width="100"></td>
 							<td width="30%"></td>
 						</tr>
 						@endif
 						<tr>
 							<td width="10%"></td>
-							<td width="60%" class="under bold" style="text-align:center; margin:0; padding:0;">{{$user->name}}</td>
+							<td width="60%" class="under bold" style="text-align:center; margin:0; padding:0;">{{form.atasan.name}}</td>
 							<td width="30%"></td>
 						</tr>
 					</table>
 				</td>
 				<td width="10%" style="height: 120px;"></td>
 			</tr>
-			@if($user->grade == '6')
+			@if(form.atasan.grade == '6')
 			<tr class="font">
 				<td width="10%"></td>
 				<td width="35%" style="border-right: 1px solid; border-left: 1px solid; border-bottom: 1px solid;"></td>
@@ -250,7 +245,7 @@
 				</td>
 				<td width="10%"></td>
 			</tr>
-			@elseif($user->grade == '5')
+			@elseif(form.atasan.grade == '5')
 			<tr class="font">
 				<td width="10%"></td>
 				<td width="35%" style="border-right: 1px solid; border-left: 1px solid; border-bottom: 1px solid;"></td>
@@ -259,7 +254,7 @@
 				<table width="100%">
 						<tr>
 							<td width="10%"></td>
-							<td width="60%" style="text-align:center;margin:0; padding:0;">Kabag {{$user->departemen}}</td>
+							<td width="60%" style="text-align:center;margin:0; padding:0;">Kabag {{form.atasan.departemen}}</td>
 							<td width="30%"></td>
 						</tr>
 					</table>
@@ -275,7 +270,7 @@
 				<table width="100%">
 						<tr>
 							<td width="10%"></td>
-							<td width="60%" style="text-align:center;margin:0; padding:0;">{{$user->jabatan}}</td>
+							<td width="60%" style="text-align:center;margin:0; padding:0;">{{form.atasan.jabatan}}</td>
 							<td width="30%"></td>
 						</tr>
 					</table>
@@ -298,11 +293,11 @@
 		</table>
 	</div>
 
-	<div style="position: fixed; bottom: 20px; left: -25px; right: 0px; height: 50px;">
+	<div style="position: fixed; bottom: 10px; left: 25px; right: 0px; height: auto;">
 		<table width="100%">
 			<tr>
 				<td>
-					<img src="storage/upload/surat/footer.PNG" width="760">
+					<img src="/assets/footer.PNG" width="760">
 
 				</td>
 			</tr>

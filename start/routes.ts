@@ -83,3 +83,6 @@ Route.get('/pdf/:id/pengajuan-panjar-luar-negeri', 'Misc/PdfsController.showDpOu
 
 Route.get('/pdf/spdk/:id', 'Misc/PdfsController.generateSpdk').as('pdf.spdk')
 Route.get('/pdf/:id/perintah-perjalanan-dinas', 'Misc/PdfsController.showSpdk')
+
+Route.get('/pdf/bto/:id', 'Misc/PdfsController.generateBto').as('pdf.bto')
+Route.get('/pdf/:id/bto', 'Misc/PdfsController.showBto')
