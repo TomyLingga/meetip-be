@@ -47,10 +47,7 @@ export default class PdfsController {
             userQuery.preload('div')
             userQuery.preload('dept')
           })
-          .preload('log', (logQuery) => {
-            // logQuery.preload('user')
-            logQuery.orderBy('created_at', 'asc')
-          }).firstOrFail()
+          .firstOrFail()
 
     const apiKey = Env.get('MAP_API_KEY')
 
@@ -135,10 +132,7 @@ export default class PdfsController {
             userQuery.preload('div')
             userQuery.preload('dept')
           })
-          .preload('log', (logQuery) => {
-            // logQuery.preload('user')
-            logQuery.orderBy('created_at', 'asc')
-          }).firstOrFail()
+          .firstOrFail()
 
     const apiKey = Env.get('MAP_API_KEY')
 
@@ -224,10 +218,7 @@ export default class PdfsController {
             userQuery.preload('div')
             userQuery.preload('dept')
           })
-          .preload('log', (logQuery) => {
-            // logQuery.preload('user')
-            logQuery.orderBy('created_at', 'asc')
-          }).firstOrFail()
+          .firstOrFail()
 
     const apiKey = Env.get('MAP_API_KEY')
 
@@ -314,10 +305,7 @@ export default class PdfsController {
             userQuery.preload('div')
             userQuery.preload('dept')
           })
-          .preload('log', (logQuery) => {
-            // logQuery.preload('user')
-            logQuery.orderBy('created_at', 'asc')
-          }).firstOrFail()
+          .firstOrFail()
 
     const apiKey = Env.get('MAP_API_KEY')
 

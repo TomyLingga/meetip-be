@@ -23,6 +23,7 @@ export default class HcBtosController {
           userQuery.preload('div')
           userQuery.preload('dept')
         })
+        .preload('report')
         .firstOrFail();
 
       const userData = request['decoded'];

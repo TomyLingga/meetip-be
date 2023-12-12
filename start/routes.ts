@@ -55,6 +55,10 @@ Route.group(() => {
   Route.get('/superior/approve/:id', 'Manager/SuratsController.approveSpdk')
   Route.put('/superior/decline/:id', 'Manager/SuratsController.declineSpdk')
 
+  //Report
+  Route.post('/report/add/:id', 'User/BtesController.addReport')
+  Route.put('/report/update/:id', 'User/BtesController.updateReport')
+
 }).middleware('user')
 
 Route.group(() => {

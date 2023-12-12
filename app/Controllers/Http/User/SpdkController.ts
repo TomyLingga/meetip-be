@@ -38,6 +38,7 @@ export default class SpdkController {
           userQuery.preload('div')
           userQuery.preload('dept')
         })
+        .preload('report')
 
       if (data.length === 0) {
         throw new Error('No data found');
@@ -77,7 +78,9 @@ export default class SpdkController {
         })
         .preload('log', (logQuery) => {
           logQuery.orderBy('created_at', 'asc')
-        }).firstOrFail()
+        })
+        .preload('report')
+        .firstOrFail()
 
       if (data === null) {
         throw new Error('No data found');

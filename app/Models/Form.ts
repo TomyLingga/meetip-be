@@ -6,6 +6,7 @@ import User from './User'
 import DpLuarNegeri from './DpLuarNegeri'
 import Panjar from './Panjar'
 import SpdkLog from './SpdkLog'
+import Report from './Report'
 
 export default class Form extends BaseModel {
   public static table = 'forms'
@@ -159,6 +160,9 @@ export default class Form extends BaseModel {
 
   @hasOne(()=> Panjar,{foreignKey: 'spdk_id',})
   public panjar: HasOne<typeof Panjar>
+
+  @hasOne(()=> Report,{foreignKey: 'forms_id',})
+  public report: HasOne<typeof Report>
 
   @hasMany(() => Destination,{foreignKey: 'forms_id',})
   public destinations: HasMany<typeof Destination>

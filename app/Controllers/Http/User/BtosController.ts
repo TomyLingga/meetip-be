@@ -28,6 +28,7 @@ export default class BtosController {
           userQuery.preload('div')
           userQuery.preload('dept')
         })
+        .preload('report')
         .preload('log', (logQuery) => {
           logQuery.orderBy('created_at', 'asc')
         })

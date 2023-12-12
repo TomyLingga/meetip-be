@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/dayjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/locale/id.js"></script>
 	<title>Surat Pengajuan</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -105,13 +107,13 @@
 				<td width="15%"></td>
 				<td width="5%">6.</td>
 				<td width="20%">Berangkat tanggal </td>
-				<td width="60%">: {{form.tgl_berangkat}}</td>
+				<td width="60%">: <span id="formatted-berangkat"></span></td>
 			</tr>
 			<tr class="font">
 				<td width="15%"></td>
 				<td width="5%">7.</td>
 				<td width="20%">Kembali tanggal </td>
-				<td width="60%">: {{form.tgl_kembali}}</td>
+				<td width="60%">: <span id="formatted-kembali"></span></td>
 			</tr>
 			<tr class="font">
 				<td width="15%"></td>
@@ -179,8 +181,22 @@
 						<tr>
 							<td width="35%" style="height: 5px;">Pada tanggal</td>
 							<td width="5%" style="height: 5px;">:</td>
-							<td width="60%" style="height: 5px;"><?=$tgl_surat;?></td>
+							<td width="60%" style="height: 5px;"><span id="formatted-surat"></span></td>
 						</tr>
+            <script>
+              document.addEventListener('DOMContentLoaded', function() {
+                const dateBerangkat = "{{ form.tgl_pergi }}";
+                const dateKembali = "{{ form.tgl_sampai }}";
+                const dateSurat = "{{ form.tgl_surat }}";
+                dayjs.locale('id');
+                const formattedSurat = dayjs(dateSurat).format('DD MMMM YYYY');
+                const formattedBerangkat = dayjs(dateBerangkat).format('DD MMMM YYYY');
+                const formattedKembali = dayjs(dateKembali).format('DD MMMM YYYY');
+                document.getElementById('formatted-berangkat').innerText = formattedBerangkat;
+                document.getElementById('formatted-surat').innerText = formattedSurat;
+                document.getElementById('formatted-kembali').innerText = formattedKembali;
+              });
+            </script>
 					</table>
 				</td>
 				<td width="10%"></td>

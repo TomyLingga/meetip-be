@@ -2,6 +2,9 @@
 <html>
 <head>
 	{{--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">  --}}
+  {{--  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>  --}}
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/dayjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/locale/id.js"></script>
 	<title>BTO</title>
 </head>
 <style type="text/css">
@@ -192,7 +195,7 @@
 				<td width="8%"></td>
 				<td style="" width="20%">Lama Perjalanan</td>
 				<td width="2%">: </td>
-				<td>{{ form.tgl_berangkat }} &nbsp; s/d &nbsp; {{ form.tgl_kembali }}</td>
+				<td><span id="formatted-berangkat"></span> &nbsp; s/d &nbsp; <span id="formatted-kembali"></span></td>
 				<td><div style="margin-bottom: 2em;"></div></td>
 			</tr>
 			<tr class="" style="font-size: 11px;">
@@ -221,8 +224,22 @@
 		<table class="tbl mt-1" style="">
 		  <tr class="" style="font-size: 11px;">
 				<td width="8%"></td>
-				<td width="" colspan="3">Diajukan Tanggal, {{form.created_at}}</td>
+				<td width="" colspan="3">Diajukan Tanggal, <span id="formatted-surat"></span></td>
 			</tr>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const dateSurat = "{{ form.tgl_surat }}"; // Get the date string from AdonisJS
+          const dateBerangkat = "{{ form.tgl_berangkat }}"; // Get the date string from AdonisJS
+          const dateKembali = "{{ form.tgl_kembali }}"; // Get the date string from AdonisJS
+          dayjs.locale('id');
+          const formattedSurat = dayjs(dateSurat).format('DD MMMM YYYY');
+          const formattedBerangkat = dayjs(dateBerangkat).format('DD MMMM YYYY');
+          const formattedKembali = dayjs(dateKembali).format('DD MMMM YYYY');
+          document.getElementById('formatted-surat').innerText = formattedSurat;
+          document.getElementById('formatted-berangkat').innerText = formattedBerangkat;
+          document.getElementById('formatted-kembali').innerText = formattedKembali;
+        });
+      </script>
 			<br>
       	<tr>
 			<td width="8%"></td>

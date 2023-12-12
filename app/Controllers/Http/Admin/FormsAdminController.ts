@@ -27,6 +27,7 @@ export default class FormsAdminController {
           userQuery.preload('div')
           userQuery.preload('dept')
         })
+        .preload('report')
 
       return response.send({
         success: true,

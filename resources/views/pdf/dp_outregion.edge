@@ -4,6 +4,8 @@
 	<title>Surat Pengajuan Panjar</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/dayjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/locale/id.js"></script>
 </head>
 <style type="text/css">
 	.under{
@@ -151,12 +153,12 @@
 					<td class="border border-dark text-center" rowspan="2"></td>
 					<td class="border border-dark text-center" width="4%">VIII.1</td>
 					<td style="font-style: italic;"><strong>START</strong></td>
-					<td colspan="5">: &nbsp; {{form.tgl_pergi}}</td>
+					<td colspan="5">: &nbsp; <span id="formatted-berangkat"></span></td>
 				</tr>
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center">VIII.2</td>
 					<td style="font-style: italic;"><strong>END</strong></td>
-					<td colspan="5">: &nbsp; {{form.tgl_sampai}}</td>
+					<td colspan="5">: &nbsp; <span id="formatted-kembali"></span></td>
 				</tr>
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center">IX</td>
@@ -168,7 +170,7 @@
 					<td class="border border-dark text-center" rowspan="4"></td>
 					<td class="border border-dark text-center" width="5%">IX.1</td>
 					<td style="font-style: italic;"><strong>DEPARTURE DATE</strong></td>
-					<td colspan="5">: &nbsp; {{form.tgl_pergi}}</td>
+					<td colspan="5">: &nbsp; <span id="formatted-berangkat2"></span></td>
 				</tr>
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center">IX.2</td>
@@ -178,8 +180,21 @@
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center">IX.3</td>
 					<td style="font-style: italic;"><strong>ARRIVAL DATE</strong></td>
-					<td colspan="5">: &nbsp; {{form.tgl_sampai}}</td>
+					<td colspan="5">: &nbsp; <span id="formatted-kembali2"></span></td>
 				</tr>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const dateBerangkat = "{{ form.tgl_pergi }}"; // Get the date string from AdonisJS
+          const dateKembali = "{{ form.tgl_sampai }}"; // Get the date string from AdonisJS
+          dayjs.locale('id');
+          const formattedBerangkat = dayjs(dateBerangkat).format('DD MMMM YYYY');
+          const formattedKembali = dayjs(dateKembali).format('DD MMMM YYYY');
+          document.getElementById('formatted-berangkat').innerText = formattedBerangkat;
+          document.getElementById('formatted-berangkat2').innerText = formattedBerangkat;
+          document.getElementById('formatted-kembali').innerText = formattedKembali;
+          document.getElementById('formatted-kembali2').innerText = formattedKembali;
+        });
+      </script>
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center">IX.4</td>
 					<td style="font-style: italic;"><strong>ARRIVAL TIME</strong></td>
