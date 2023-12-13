@@ -59,6 +59,13 @@ Route.group(() => {
   Route.post('/report/add/:id', 'User/BtesController.addReport')
   Route.put('/report/update/:id', 'User/BtesController.updateReport')
 
+  //Destination
+  Route.put('/destination/attend/:id', 'User/BtesController.attendDestination')
+
+  //BTE
+  Route.post('/bte/add/:id', 'User/BtesController.createBte')
+  Route.put('/bte/update/:id', 'User/BtesController.updateBte')
+  Route.put('/bte/submit/:id', 'User/BtesController.submitBte')
 }).middleware('user')
 
 Route.group(() => {

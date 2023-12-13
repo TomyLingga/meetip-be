@@ -123,7 +123,7 @@ export default class Form extends BaseModel {
   public uang_tiket: number
 
   @column({})
-  public lain: JSON
+  public lain: any
 
   @column({})
   public total: number

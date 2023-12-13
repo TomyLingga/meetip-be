@@ -55,7 +55,7 @@ export default class BteLuarNegeri extends BaseModel {
   public airport: number
 
   @column({})
-  public lain: JSON
+  public lain: any
 
   @column({})
   public total: number
