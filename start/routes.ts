@@ -20,9 +20,9 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async () => {
-  return { hello: 'world' }
-}).middleware('user')
+// Route.get('/', async () => {
+//   return { hello: 'world' }
+// }).middleware('user')
 
 Route.group(() => {
   Route.get('/test', 'Test/TestMiddlesController.test')
@@ -97,3 +97,9 @@ Route.get('/pdf/:id/perintah-perjalanan-dinas', 'Misc/PdfsController.showSpdk')
 
 Route.get('/pdf/bto/:id', 'Misc/PdfsController.generateBto').as('pdf.bto')
 Route.get('/pdf/:id/bto', 'Misc/PdfsController.showBto')
+
+Route.get('/pdf/bteregion/:id', 'Misc/PdfsController.generateBte').as('pdf.bteregion')
+Route.get('/pdf/:id/bte-dalam-negeri', 'Misc/PdfsController.showBte')
+
+Route.get('/pdf/bteoutregion/:id', 'Misc/PdfsController.generateBteLn').as('pdf.bteoutregion')
+Route.get('/pdf/:id/bte-luar-negeri', 'Misc/PdfsController.showBteLn')

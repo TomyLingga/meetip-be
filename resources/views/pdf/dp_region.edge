@@ -74,7 +74,7 @@
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center" width="4%">I</td>
 					<!-- <td></td> -->
-					<td style="font-style: italic;" width="20%" colspan="3"><strong>SPJ/BTO NUMBER</strong></td>
+					<td style="font-style: italic;padding-left:1%;" width="20%" colspan="3"><strong>SPJ/BTO NUMBER</strong></td>
 					@if(form.nomor_surat == '0')
 					<td colspan="4">: &nbsp; SURAT BELUM DI TERBITKAN</td>
 					@else
@@ -84,39 +84,39 @@
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center">II</td>
 					<!-- <td></td> -->
-					<td style="font-style: italic;" colspan="3"><strong>NAME</strong></td>
+					<td style="font-style: italic;padding-left:1%;" colspan="3"><strong>NAME</strong></td>
 					<td colspan="4">: &nbsp; {{form.user.name.toUpperCase()}}</td>
 				</tr>
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center">III</td>
 					<!-- <td></td> -->
-					<td style="font-style: italic;" colspan="3"><strong>POSITION</strong></td>
+					<td style="font-style: italic;padding-left:1%;" colspan="3"><strong>POSITION</strong></td>
 					<td colspan="4">: &nbsp; {{form.user.jabatan.toUpperCase()}}</td>
 				</tr>
-                <tr class="border border-dark" style="font-size:10px;">
+        <tr class="border border-dark" style="font-size:10px;"">
 					<td class="border border-dark text-center">IV</td>
 					<!-- <td></td> -->
-					<td style="font-style: italic;" colspan="3"><strong>JOB LEVEL</strong></td>
-                    @if(form.user.grade == '1')
-					<td colspan="4">: &nbsp; JUNIOR STAFF/EQUAL</td>
+					<td style="font-style: italic;padding-left:1%;" colspan="3"><strong>JOB LEVEL</strong></td>
+          @if(form.user.grade == '1')
+					<td colspan="5">: &nbsp; JUNIOR STAFF/EQUAL</td>
 					@elseif(form.user.grade == '2')
-					<td colspan="4">: &nbsp; STAFF/EQUAL</td>
+					<td colspan="5">: &nbsp; STAFF/EQUAL</td>
 					@elseif(form.user.grade == '3')
-					<td colspan="4">: &nbsp; SENIOR STAFF/EQUAL</td>
+					<td colspan="5">: &nbsp; SENIOR STAFF/EQUAL</td>
 					@elseif(form.user.grade == '4')
-					<td colspan="4">: &nbsp; EXECUTIVE/EQUAL</td>
+					<td colspan="5">: &nbsp; EXECUTIVE/EQUAL</td>
 					@elseif(form.user.grade == '5')
-					<td colspan="4">: &nbsp; GENERAL MANAGER/EQUAL</td>
+					<td colspan="5">: &nbsp; GENERAL MANAGER/EQUAL</td>
 					@elseif(form.user.grade == '6')
-					<td colspan="4">: &nbsp; SEVP/COMMISSIONER/EQUAL</td>
+					<td colspan="5">: &nbsp; SEVP/COMMISSIONER/EQUAL</td>
 					@elseif(form.user.grade == '13')
-					<td colspan="4">: &nbsp; DIRECTOR/EQUAL</td>
+					<td colspan="5">: &nbsp; DIRECTOR/EQUAL</td>
 					@endif
 				</tr>
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center">V</td>
 					<!-- <td></td> -->
-					<td style="font-style: italic;" colspan="3"><strong>DESTINATION</strong></td>
+					<td style="font-style: italic;padding-left:1%;" colspan="3"><strong>DESTINATION</strong></td>
           <td colspan="4">
             <div style="display: flex;">
               <div style="align-self: center; width:auto;">:</div>
@@ -134,52 +134,52 @@
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center">VI</td>
 					<!-- <td></td> -->
-					<td style="font-style: italic;" colspan="3"><strong>NECESSARY</strong></td>
+					<td style="font-style: italic;padding-left:1%;" colspan="3"><strong>NECESSARY</strong></td>
 					<td colspan="4">:  &nbsp; {{(form.keperluan.toUpperCase())}}</td>
 				</tr>
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center">VII</td>
 					<!-- <td></td> -->
-					<td style="font-style: italic;" colspan="3"><strong>TOTAL DAYS</strong></td>
+					<td style="font-style: italic;padding-left:1%;" colspan="3"><strong>TOTAL DAYS</strong></td>
 					<td colspan="4">: &nbsp; {{(form.lama_hari)}} HARI</td>
 				</tr>
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center">VIII</td>
 					<!-- <td></td> -->
-					<td style="font-style: italic;" colspan="3"><strong>PERIODE</strong></td>
+					<td style="font-style: italic;padding-left:1%;" colspan="3"><strong>PERIODE</strong></td>
 					<td colspan="4"></td>
 				</tr>
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center" rowspan="2"></td>
 					<td class="border border-dark text-center" width="4%">VIII.1</td>
-					<td style="font-style: italic;" colspan="2"><strong>START</strong></td>
+					<td style="font-style: italic;padding-left:1%;" colspan="2"><strong>START</strong></td>
 					<td colspan="4">: &nbsp; <span id="formatted-berangkat"></span></td>
 				</tr>
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center">VIII.2</td>
-					<td style="font-style: italic;" colspan="2"><strong>END</strong></td>
+					<td style="font-style: italic;padding-left:1%;" colspan="2"><strong>END</strong></td>
 					<td colspan="4">: &nbsp; <span id="formatted-kembali"></span></td>
 				</tr>
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center">IX</td>
 					<!-- <td></td> -->
-					<td style="font-style: italic;" colspan="3"><strong>DESCRIPTION OF SCHEDULE</strong></td>
+					<td style="font-style: italic;padding-left:1%;" colspan="3"><strong>DESCRIPTION OF SCHEDULE</strong></td>
 					<td colspan="4"></td>
 				</tr>
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center" rowspan="4"></td>
 					<td class="border border-dark text-center" width="5%">IX.1</td>
-					<td style="font-style: italic;" colspan="2"><strong>DEPARTURE DATE</strong></td>
+					<td style="font-style: italic;padding-left:1%;" colspan="2"><strong>DEPARTURE DATE</strong></td>
 					<td colspan="4">: &nbsp; <span id="formatted-berangkat2"></span></td>
 				</tr>
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center">IX.2</td>
-					<td style="font-style: italic;" colspan="2"><strong>DEPARTURE TIME</strong></td>
+					<td style="font-style: italic;padding-left:1%;" colspan="2"><strong>DEPARTURE TIME</strong></td>
 					<td colspan="4">: &nbsp; {{form.jam_pergi}}</td>
 				</tr>
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center">IX.3</td>
-					<td style="font-style: italic;" colspan="2"><strong>ARRIVAL DATE</strong></td>
+					<td style="font-style: italic;padding-left:1%;" colspan="2"><strong>ARRIVAL DATE</strong></td>
 					<td colspan="4">: &nbsp; <span id="formatted-kembali2"></span></td>
 				</tr>
         <script>
@@ -197,23 +197,23 @@
       </script>
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center">IX.4</td>
-					<td style="font-style: italic;" colspan="2"><strong>ARRIVAL TIME</strong></td>
+					<td style="font-style: italic;padding-left:1%;" colspan="2"><strong>ARRIVAL TIME</strong></td>
 					<td colspan="4">: &nbsp; {{form.jam_sampai}}</td>
 				</tr>
 				@if(form.panjar != null)
 					<tr class="border border-dark" style="font-size:10px;">
 						<td class="border border-dark text-center">X</td>
 						<!-- <td></td> -->
-						<td style="font-style: italic;" colspan="3"><strong>DETAIL OF TRAVEL EXPENSES</strong></td>
+						<td style="font-style: italic;padding-left:1%;" colspan="3"><strong>DETAIL OF TRAVEL EXPENSES</strong></td>
 						<td colspan="4"></td>
 					</tr>
 					<tr class="border border-dark" style="font-size:10px;">
 						<td class="border border-dark text-center" rowspan="17"></td>
 						<td class="border border-dark text-center">X.1</td>
 						@if(form.wilayah == 'dalam wilayah')
-						<td style="font-style: italic;" colspan="2"><strong>INSIDE OF THE REGION</strong></td>
+						<td style="font-style: italic;padding-left:1%;" colspan="2"><strong>INSIDE OF THE REGION</strong></td>
 						@else
-						<td style="font-style: italic;" colspan="2"><strong>OUTSIDE OF THE REGION</strong></td>
+						<td style="font-style: italic;padding-left:1%;" colspan="2"><strong>OUTSIDE OF THE REGION</strong></td>
 						@endif
 						<td colspan="4"></td>
 					</tr>
@@ -238,28 +238,28 @@
 						<td class="border border-dark" width="14%" colspan="3"style="padding-left:3%;">BREAKFAST</td>
 						<!-- <td class="border border-dark text-center"></td>
 						<td class="border border-dark text-center"></td> -->
-						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{form.panjar.sarapan}}</td>
+						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{(1*form.panjar.sarapan).toLocaleString('id-ID')}}</td>
 					</tr>
 					<tr class="border border-dark" style="font-size:10px;">
 						<td class="border border-dark text-center" width="10%">X.1.1.2</td>
 						<td class="border border-dark" width="14%" colspan="3"style="padding-left:3%;">LUNCH</td>
 						<!-- <td class="border border-dark text-center"></td>
 						<td class="border border-dark text-center"></td> -->
-						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{form.panjar.makan_siang}}</td>
+						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{(1*form.panjar.makan_siang).toLocaleString('id-ID')}}</td>
 					</tr>
 					<tr class="border border-dark" style="font-size:10px;">
 						<td class="border border-dark text-center" width="10%">X.1.1.3</td>
 						<td class="border border-dark" width="14%" colspan="3"style="padding-left:3%;">DINNER</td>
 						<!-- <td class="border border-dark text-center"></td>
 						<td class="border border-dark text-center"></td> -->
-						<td class="border border-dark" style="text-align:right; padding-right:3%;; padding-right:3%;">Rp {{form.panjar.makan_malam}}</td>
+						<td class="border border-dark" style="text-align:right; padding-right:3%;; padding-right:3%;">Rp {{(1*form.panjar.makan_malam).toLocaleString('id-ID')}}</td>
 					</tr>
 					<tr class="border border-dark" style="font-size:10px;">
 						<td class="border border-dark text-center">X.1.2</td>
 						<td class="border border-dark" colspan="4"style="padding-left:3%;">POCKET MONEY</td>
 						<!-- <td class="border border-dark text-center"></td>
 						<td class="border border-dark text-center"></td> -->
-						<td class="border border-dark" style="text-align:right; padding-right:3%;; padding-right:3%;">Rp {{form.panjar.saku}}</td>
+						<td class="border border-dark" style="text-align:right; padding-right:3%;; padding-right:3%;">Rp {{(1*form.panjar.saku).toLocaleString('id-ID')}}</td>
 					</tr>
 					<tr class="border border-dark" style="font-size:10px;">
 						<td class="border border-dark text-center">X.1.3</td>
@@ -274,7 +274,7 @@
 						<td class="border border-dark" width="14%" colspan="3"style="padding-left:3%;">OFFICIAL CAR</td>
 						<!-- <td class="border border-dark text-center"></td>
 						<td class="border border-dark text-center"></td> -->
-						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{form.panjar.official}}</td>
+						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{(1*form.panjar.official).toLocaleString('id-ID')}}</td>
 					</tr>
 					<tr class="border border-dark" style="font-size:10px;">
 						<td class="border border-dark text-center"></td>
@@ -282,7 +282,7 @@
 						<td class="border border-dark" width="14%" colspan="3"style="padding-left:3%;">25 - 100 KM</td>
 						<!-- <td class="border border-dark text-center"></td>
 						<td class="border border-dark text-center"></td> -->
-						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{form.panjar.dualima}}</td>
+						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{(1*form.panjar.dualima).toLocaleString('id-ID')}}</td>
 					</tr>
 					<tr class="border border-dark" style="font-size:10px;">
 						<td class="border border-dark text-center"></td>
@@ -290,7 +290,7 @@
 						<td class="border border-dark" width="14%" colspan="3"style="padding-left:3%;">101 - 200 KM</td>
 						<!-- <td class="border border-dark text-center"></td>
 						<td class="border border-dark text-center"></td> -->
-						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{form.panjar.seratussatu}}</td>
+						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{(1*form.panjar.seratussatu).toLocaleString('id-ID')}}</td>
 					</tr>
 					<tr class="border border-dark" style="font-size:10px;">
 						<td class="border border-dark text-center"></td>
@@ -298,54 +298,54 @@
 						<td class="border border-dark" width="14%" colspan="3"style="padding-left:3%;">> 200 KM</td>
 						<!-- <td class="border border-dark text-center"></td>
 						<td class="border border-dark text-center"></td> -->
-						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{form.panjar.duaratus}}</td>
+						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{(1*form.panjar.duaratus).toLocaleString('id-ID')}}</td>
 					</tr>
 					<tr class="border border-dark" style="font-size:10px;">
 						<td class="border border-dark text-center">X.1.4</td>
 						<td class="border border-dark" colspan="4"style="padding-left:3%;">HOTEL</td>
 						<!-- <td class="border border-dark text-center"></td>
 						<td class="border border-dark text-center"></td> -->
-						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{form.panjar.hotel}}</td>
+						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{(1*form.panjar.hotel).toLocaleString('id-ID')}}</td>
 					</tr>
 					<tr class="border border-dark" style="font-size:10px;">
 						<td class="border border-dark text-center">X.1.5</td>
 						<td class="border border-dark" colspan="4"style="padding-left:3%;">LAUNDRY</td>
 						<!-- <td class="border border-dark text-center"></td>
 						<td class="border border-dark text-center"></td> -->
-						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{form.panjar.laundry}}</td>
+						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{(1*form.panjar.laundry).toLocaleString('id-ID')}}</td>
 					</tr>
 					<tr class="border border-dark" style="font-size:10px;">
 						<td class="border border-dark text-center">X.1.6</td>
 						<td class="border border-dark" colspan="4"style="padding-left:3%;">LOCAL TRANSPORTATION</td>
 						<!-- <td class="border border-dark text-center"></td>
 						<td class="border border-dark text-center"></td> -->
-						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{form.panjar.transport_dilokasi}}</td>
+						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{(1*form.panjar.transport_dilokasi).toLocaleString('id-ID')}}</td>
 					</tr>
 					<tr class="border border-dark" style="font-size:10px;">
 						<td class="border border-dark text-center">X.1.7</td>
 						<td class="border border-dark" colspan="4"style="padding-left:3%;">TICKET</td>
 						<!-- <td class="border border-dark text-center"></td>
 						<td class="border border-dark text-center"></td> -->
-						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{form.panjar.tiket}}</td>
+						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{(1*form.panjar.tiket).toLocaleString('id-ID')}}</td>
 					</tr>
 					<tr class="border border-dark" style="font-size:10px;">
 						<td class="border border-dark text-center">X.1.8</td>
 						<td class="border border-dark" colspan="4"style="padding-left:3%;">COMMUNICATION</td>
 						<!-- <td class="border border-dark text-center"></td>
 						<td class="border border-dark text-center"></td> -->
-						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{form.panjar.komunikasi}}</td>
+						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{(1*form.panjar.komunikasi).toLocaleString('id-ID')}}</td>
 					</tr>
 					<tr class="border border-dark" style="font-size:10px;">
 						<td class="border border-dark text-center"></td>
 						<td class="border border-dark text-center">X.2</td>
-						<td style="font-style: italic;" colspan="5" style="padding-left:3%;"><strong>TO THE AIRPORT</strong></td>
-						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{form.panjar.airport}}</td>
+						<td style="font-style: italic;padding-left:1%;" colspan="5"><strong>TO THE AIRPORT</strong></td>
+						<td class="border border-dark" style="text-align:right; padding-right:3%;">Rp {{(1*form.panjar.airport).toLocaleString('id-ID')}}</td>
 					</tr>
 					<tr class="border border-dark" style="font-size:10px;">
 						<!-- <td></td> -->
 						<td class="border border-dark text-center" style="font-style: italic;" colspan="7"><strong>TOTAL</strong></td>
 						<!-- <td colspan="3"></td> -->
-						<td class="border border-dark" style="text-align:right; padding-right:3%;font-weight:bold">Rp {{form.panjar.total_panjar}}</td>
+						<td class="border border-dark" style="text-align:right; padding-right:3%;font-weight:bold">Rp {{(1*form.panjar.total_panjar).toLocaleString('id-ID')}}</td>
 					</tr>
 				@endif
 			</tbody>
