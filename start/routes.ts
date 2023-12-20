@@ -76,6 +76,7 @@ Route.group(() => {
 
 Route.group(() => {
 
+  Route.put('/admin-spdk/update/:id', 'Admin/FormsAdminController.update')
   //Panjar
   Route.get('/panjar-spdk/approve/:id', 'Admin/FormsAdminController.approvePanjar')
   Route.put('/panjar-spdk/revisi/:id', 'Admin/FormsAdminController.revisiPanjar')
@@ -84,6 +85,10 @@ Route.group(() => {
   Route.put('/surat-spdk/create/:id', 'Admin/FormsAdminController.createSurat')
   Route.put('/surat-spdk/submit/:id', 'Admin/FormsAdminController.submitSurat')
 
+  //BTE
+  Route.get('/bte-spdk/approve/:id', 'Admin/BteController.approveBte')
+  Route.put('/bte-spdk/revisi/:id', 'Admin/BteController.revisiBte')
+  Route.get('/bte-spdk/cair/:id', 'Admin/BteController.cairBte')
 }).middleware('admin')
 
 Route.get('/pdf/dpregion/:id', 'Misc/PdfsController.generateDpRegion').as('pdf.dpregion')

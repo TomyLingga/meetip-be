@@ -64,13 +64,16 @@ export default class PdfsController {
 
           const placesResponse = await axios.get<{
             status: string;
-            result: { name: string } | null;
+            displayName: {
+              text: string;
+              languageCode: string;
+            }| null;
           }>(
-            `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${apiKey}`
-          );
-
-          if (placesResponse.data.status === 'OK' && placesResponse.data.result) {
-            return placesResponse.data.result.name;
+            `https://places.googleapis.com/v1/places/${placeId}?fields=id,displayName&key=${apiKey}`
+            // `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${apiKey}`
+            );
+          if (placesResponse.data.displayName) {
+            return placesResponse.data.displayName.text;
           }
         }
 
@@ -149,13 +152,16 @@ export default class PdfsController {
 
           const placesResponse = await axios.get<{
             status: string;
-            result: { name: string } | null;
+            displayName: {
+              text: string;
+              languageCode: string;
+            }| null;
           }>(
-            `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${apiKey}`
-          );
-
-          if (placesResponse.data.status === 'OK' && placesResponse.data.result) {
-            return placesResponse.data.result.name;
+            `https://places.googleapis.com/v1/places/${placeId}?fields=id,displayName&key=${apiKey}`
+            // `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${apiKey}`
+            );
+          if (placesResponse.data.displayName) {
+            return placesResponse.data.displayName.text;
           }
         }
 
@@ -235,13 +241,16 @@ export default class PdfsController {
 
           const placesResponse = await axios.get<{
             status: string;
-            result: { name: string } | null;
+            displayName: {
+              text: string;
+              languageCode: string;
+            }| null;
           }>(
-            `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${apiKey}`
-          );
-
-          if (placesResponse.data.status === 'OK' && placesResponse.data.result) {
-            return placesResponse.data.result.name;
+            `https://places.googleapis.com/v1/places/${placeId}?fields=id,displayName&key=${apiKey}`
+            // `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${apiKey}`
+            );
+          if (placesResponse.data.displayName) {
+            return placesResponse.data.displayName.text;
           }
         }
 
@@ -322,13 +331,16 @@ export default class PdfsController {
 
           const placesResponse = await axios.get<{
             status: string;
-            result: { name: string } | null;
+            displayName: {
+              text: string;
+              languageCode: string;
+            }| null;
           }>(
-            `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${apiKey}`
-          );
-
-          if (placesResponse.data.status === 'OK' && placesResponse.data.result) {
-            return placesResponse.data.result.name;
+            `https://places.googleapis.com/v1/places/${placeId}?fields=id,displayName&key=${apiKey}`
+            // `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${apiKey}`
+            );
+          if (placesResponse.data.displayName) {
+            return placesResponse.data.displayName.text;
           }
         }
 
@@ -408,13 +420,16 @@ export default class PdfsController {
 
           const placesResponse = await axios.get<{
             status: string;
-            result: { name: string } | null;
+            displayName: {
+              text: string;
+              languageCode: string;
+            }| null;
           }>(
-            `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${apiKey}`
-          );
-
-          if (placesResponse.data.status === 'OK' && placesResponse.data.result) {
-            return placesResponse.data.result.name;
+            `https://places.googleapis.com/v1/places/${placeId}?fields=id,displayName&key=${apiKey}`
+            // `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${apiKey}`
+            );
+          if (placesResponse.data.displayName) {
+            return placesResponse.data.displayName.text;
           }
         }
 
@@ -502,8 +517,6 @@ export default class PdfsController {
             // `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${apiKey}`
             );
           if (placesResponse.data.displayName) {
-          // if (placesResponse.data.status === 'OK' && placesResponse.data.displayName) {
-            console.log("lewat")
             return placesResponse.data.displayName.text;
           }
         }
