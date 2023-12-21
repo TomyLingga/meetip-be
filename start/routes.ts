@@ -66,6 +66,19 @@ Route.group(() => {
   Route.post('/bte/add/:id', 'User/BtesController.createBte')
   Route.put('/bte/update/:id', 'User/BtesController.updateBte')
   Route.put('/bte/submit/:id', 'User/BtesController.submitBte')
+
+  //Meeting Room
+  Route.get('/room/all', 'MeetingRoom/User/RoomsController.index')
+  Route.get('/room/get/:id', 'MeetingRoom/User/RoomsController.show')
+
+  //Booking
+  Route.get('/booking/all', 'MeetingRoom/User/BookingsController.index')
+  Route.get('/booking/mine', 'MeetingRoom/User/BookingsController.myBooking')
+  Route.get('/booking/get/:id', 'MeetingRoom/User/BookingsController.show')
+  Route.post('/booking/add', 'MeetingRoom/User/BookingsController.create')
+  Route.put('/booking/update/:id', 'MeetingRoom/User/BookingsController.update')
+  Route.put('/booking/cancel/:id', 'MeetingRoom/User/BookingsController.cancel')
+
 }).middleware('user')
 
 Route.group(() => {
@@ -89,6 +102,11 @@ Route.group(() => {
   Route.get('/bte-spdk/approve/:id', 'Admin/BteController.approveBte')
   Route.put('/bte-spdk/revisi/:id', 'Admin/BteController.revisiBte')
   Route.get('/bte-spdk/cair/:id', 'Admin/BteController.cairBte')
+
+  // Meeting room
+  Route.post('/room/add', 'MeetingRoom/User/RoomsController.create')
+  Route.put('/room/update/:id', 'MeetingRoom/User/RoomsController.update')
+
 }).middleware('admin')
 
 Route.get('/pdf/dpregion/:id', 'Misc/PdfsController.generateDpRegion').as('pdf.dpregion')

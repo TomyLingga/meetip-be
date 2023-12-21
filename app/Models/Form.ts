@@ -10,7 +10,8 @@ import Report from './Report'
 
 export default class Form extends BaseModel {
   public static table = 'forms'
-  public serializeExtras = true;
+  public serializeExtras = true
+
   @column({ isPrimary: true })
   public id: number
 
