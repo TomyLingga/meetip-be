@@ -165,7 +165,7 @@
 				<td style="font-size: 14px;"><div style="margin-left: 8.5em; margin-bottom: 0.5em;"><b>DETAIL</b></div></td>
 				<td><div style="margin-bottom: 2em;"></div></td>
 			</tr>
-			<!-- <tr>RENCANA KEBUTUHAN TENAGA KERJA</tr> -->
+      @if(locationNames != '')
 			<tr class="" style="font-size: 11px;">
 				<td width="8%"></td>
 				<td style="" width="20%">Tujuan</td>
@@ -184,6 +184,15 @@
         </td>
 				<td><div style="margin-bottom: 2em;"></div></td>
 			</tr>
+      @else
+        <tr class="" style="font-size: 11px;">
+				<td width="8%"></td>
+				<td style="" width="20%">Tujuan</td>
+				<td width="2%">: </td>
+				<td>{{form.tujuan}}</td>
+				<td><div style="margin-bottom: 2em;"></div></td>
+			</tr>
+      @end
 			<tr class="" style="font-size: 11px;">
 				<td width="8%"></td>
 				<td style="" width="20%">Keperluan</td>

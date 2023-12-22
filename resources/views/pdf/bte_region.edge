@@ -111,9 +111,12 @@
 					<td colspan="5">: &nbsp; SEVP/COMMISSIONER/EQUAL</td>
 					@elseif(form.user.grade == '13')
 					<td colspan="5">: &nbsp; DIRECTOR/EQUAL</td>
+          @else
+          <td width="60%">: {{form.golongan}}</td>
 					@endif
 				</tr>
-				<tr class="border border-dark" style="font-size:10px;">
+        @if(locationNames != '')
+          <tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center">V</td>
 					<!-- <td></td> -->
 					<td style="font-style: italic;padding-left:1%;" colspan="2"><strong>DESTINATION</strong></td>
@@ -130,6 +133,14 @@
             </div>
           </td>
 				</tr>
+        @else
+          <tr class="border border-dark" style="font-size:10px;">
+					<td class="border border-dark text-center">V</td>
+					<!-- <td></td> -->
+					<td style="font-style: italic;padding-left:1%;" colspan="2"><strong>DESTINATION</strong></td>
+					<td colspan="5">:  &nbsp; {{form.tujuan.toUpperCase()}}</td>
+				</tr>
+        @end
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center">VI</td>
 					<!-- <td></td> -->
@@ -206,7 +217,11 @@
 						<td colspan="4"></td>
 					</tr>
 					<tr class="border border-dark" style="font-size:10px;">
+          @if(form.lain != null)
 						<td class="border border-dark text-center" rowspan="{{12+form.lain.length}}"></td>
+          @else
+						<td class="border border-dark text-center" rowspan="{{12}}"></td>
+          @end
 						<td class="border border-dark text-center">X.1</td>
 						@if(form.wilayah == '1')
 						<td style="font-style: italic;padding-left:1%;" colspan="2"><strong>INSIDE OF THE REGION</strong></td>
@@ -312,13 +327,21 @@
 						<!-- <td></td> -->
 						<td class="border border-dark text-center" style="font-style: italic;" colspan="5"><strong>DOWN PAYMENT</strong></td>
 						<!-- <td colspan="3"></td> -->
+            @if(form.panjar != null)
 						<td class="border border-dark" style="text-align:right; padding-right:3%;" colspan="3" >Rp {{(1*form.panjar.total_panjar).toLocaleString('id-ID')}}</td>
+            @else
+						<td class="border border-dark" style="text-align:right; padding-right:3%;" colspan="3" >Rp 0</td>
+            @end
 					</tr>
 					<tr class="border border-dark" style="font-size:10px;">
 						<!-- <td></td> -->
 						<td class="border border-dark text-center" style="font-style: italic;" colspan="5"><strong>FINAL</strong></td>
 						<!-- <td colspan="3"></td> -->
+            @if(form.panjar != null)
 						<td class="border border-dark" style="text-align:right; padding-right:3%;font-weight:bold;" colspan="3">Rp {{(1*form.total - form.panjar.total_panjar).toLocaleString('id-ID')}}</td>
+            @else
+						<td class="border border-dark" style="text-align:right; padding-right:3%;" colspan="3" >Rp {{(1*form.total).toLocaleString('id-ID')}}</td>
+            @end
 					</tr>
 			</tbody>
 		</table>

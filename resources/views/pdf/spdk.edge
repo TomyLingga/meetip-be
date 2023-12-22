@@ -64,7 +64,7 @@
 				<td width="15%"></td>
 				<td width="5%">3.</td>
 				<td width="20%">Golongan </td>
-        		@if (form.golongan == "1")
+        @if (form.golongan == "1")
 				<td width="60%">: Junior Staff </td>
 				@elseif(form.golongan == "2")
 				<td width="60%">: Staff</td>
@@ -78,8 +78,11 @@
 				<td width="60%">: SEVP</td>
 				@elseif(form.golongan == "7")
 				<td width="60%">: Direktur/Komisaris</td>
+        @else
+        <td width="60%">: {{form.golongan}}</td>
 				@endif
 			</tr>
+      @if(locationNames != '')
 			<tr class="font">
 				<td width="15%"></td>
 				<td width="5%">4.</td>
@@ -97,6 +100,14 @@
           </div>
         </td>
 			</tr>
+      @else
+        <tr class="font">
+				<td width="15%"></td>
+				<td width="5%">4.</td>
+				<td width="20%">Untuk bertugas ke </td>
+				<td width="60%">: {{form.tujuan}}</td>
+			</tr>
+      @end
 			<tr class="font">
 				<td width="15%"></td>
 				<td width="5%">5.</td>

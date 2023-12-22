@@ -111,8 +111,11 @@
 					<td colspan="5">: &nbsp; DIRECTOR/EQUAL</td>
 					@elseif(form.user.grade == '13')
 					<td colspan="5">: &nbsp; SEVP/COMMISSIONER/EQUAL</td>
+          @else
+          <td width="60%">: {{form.golongan}}</td>
 					@endif
 				</tr>
+        @if(locationNames != '')
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center">V</td>
 					<!-- <td></td> -->
@@ -130,6 +133,14 @@
             </div>
           </td>
 				</tr>
+        @else
+        <tr class="border border-dark" style="font-size:10px;">
+					<td class="border border-dark text-center">V</td>
+					<!-- <td></td> -->
+					<td style="font-style: italic; padding-left:1%;" colspan="2"><strong>DESTINATION</strong></td>
+					<td colspan="5">:  &nbsp; {{form.tujuan.toUpperCase()}}</td>
+				</tr>
+        @end
 				<tr class="border border-dark" style="font-size:10px;">
 					<td class="border border-dark text-center">VI</td>
 					<!-- <td></td> -->
