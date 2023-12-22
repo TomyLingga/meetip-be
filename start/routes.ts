@@ -66,6 +66,8 @@ Route.group(() => {
   Route.post('/bte/add/:id', 'User/BtesController.createBte')
   Route.put('/bte/update/:id', 'User/BtesController.updateBte')
   Route.put('/bte/submit/:id', 'User/BtesController.submitBte')
+  Route.put('/my-spdk/done/:id', 'User/BtesController.selesaiSpdk')
+
 
   //Meeting Room
   Route.get('/room/all', 'MeetingRoom/User/RoomsController.index')

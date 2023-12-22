@@ -514,7 +514,7 @@ export default class BtesController {
       const userData = request['decoded'];
 
       if (data.status != 8) {
-        throw new Error('Cant approve if status not 8, current status '+data.status)
+        throw new Error('Cant submit if status not 8, current status '+data.status)
       }
 
       data.merge({
@@ -528,6 +528,63 @@ export default class BtesController {
         user_id: userData.sub,
         spdk_id: data.id,
         action: 'SUBMIT BTE',
+        info: '-',
+      });
+
+      await trx.commit();
+
+      return response.send({
+        success: true,
+      }, 200);
+    } catch (error) {
+      await trx.rollback();
+      const mistake = error.messages ? error.messages : error.message;
+
+      return response.status(500).json({
+        success: false,
+        errors: mistake,
+        stack: error.stack,
+      });
+    }
+  }
+
+  public async selesaiSpdk({ response, params, request }) {
+    const trx = await Database.transaction();
+
+    try {
+      const data = await Form.query()
+        .where('id', params.id)
+        .preload('user', (userQuery) => {
+          userQuery.preload('div')
+          userQuery.preload('dept')
+        })
+        .preload('pemberiTugas', (userQuery) => {
+          userQuery.preload('div')
+          userQuery.preload('dept')
+        })
+        .preload('atasan', (userQuery) => {
+          userQuery.preload('div')
+          userQuery.preload('dept')
+        })
+        .firstOrFail();
+
+      const userData = request['decoded'];
+
+      if (data.status != 6) {
+        throw new Error('Cant submit if status not 6, current status '+data.status)
+      }
+
+      data.merge({
+        status: 7,
+        info: 'Silahkan Isi BTE',
+      });
+
+      await data.save();
+
+      await data.related('log').create({
+        user_id: userData.sub,
+        spdk_id: data.id,
+        action: 'DONE SPDK',
         info: '-',
       });
 
