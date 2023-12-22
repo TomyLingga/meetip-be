@@ -94,6 +94,14 @@ export default class PanjarsController {
       newPanjar.useTransaction(trx)
       await newPanjar.save()
 
+      form.merge({
+        status: 301,
+        info: 'Silahkan cek DP terlebih dahulu',
+      })
+
+      form.useTransaction(trx)
+      await form.save()
+
       await form.related('log').create({
         user_id: userData.sub,
         spdk_id: form.id,

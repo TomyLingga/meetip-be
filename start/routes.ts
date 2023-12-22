@@ -84,6 +84,8 @@ Route.group(() => {
 Route.group(() => {
   //Form
   Route.get('/index-spdk', 'Admin/FormsAdminController.index')
+  Route.get('/hc/approve/:id', 'Hc/HcBtosController.approveBto')
+  Route.put('/hc/decline/:id', 'Hc/HcBtosController.declineBto')
 
 }).middleware('hc')
 
