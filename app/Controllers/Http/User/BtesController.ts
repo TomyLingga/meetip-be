@@ -184,7 +184,7 @@ export default class BtesController {
 
       const distanceValue = distanceMatrixResponse.data.rows[0].elements[0].distance.value
 
-      if (distanceValue <= 500) {
+      if (distanceValue <= 1000) {
         tujuan.attend = true;
         await tujuan.save();
 
