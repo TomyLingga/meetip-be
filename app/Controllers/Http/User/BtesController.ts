@@ -228,7 +228,7 @@ export default class BtesController {
         await trx.commit()
 
         return response.status(400).json({
-          error: 'Cannot attend when the distance is greater than 100 meters.',
+          error: 'Cannot attend when the distance is greater than 500 meters.',
           currentDistance: distanceValue,
         });
       }

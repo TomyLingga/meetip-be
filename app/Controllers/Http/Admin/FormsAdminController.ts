@@ -225,7 +225,7 @@ export default class FormsAdminController {
       console.log(data.atasan)
       if (data.atasan_id == data.teruskan) {
         status = 6
-        info = "Silahkan Cetak"
+        info = "Silahkan melakukan Check point di setiap lokasi tujuan"
       } else {
         status = 5
         info = "Menunggu Persetujuan dari " + data.atasan.name

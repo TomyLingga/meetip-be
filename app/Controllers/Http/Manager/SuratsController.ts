@@ -78,7 +78,7 @@ export default class SuratsController {
 
           data.merge({
             status: 6,
-            info: 'Silahkan Cetak',
+            info: 'Silahkan melakukan Check point di setiap lokasi tujuan',
           });
 
           await data.save();
