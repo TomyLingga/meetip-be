@@ -111,6 +111,8 @@ export default class SpdkController {
     const countFormatted = count[0].total.toString().padStart(4, '0')
     const monthInRoman = await this.getMonthInRoman(currentMonth)
 
+    console.log(`roman ${monthInRoman} aktual ${currentMonth}`)
+
     const nomorSurat = `${countFormatted}/INL/SPDK/${monthInRoman}/${currentYear}`
 
     return nomorSurat
@@ -123,7 +125,8 @@ export default class SpdkController {
       9: 'IX', 10: 'X', 11: 'XI', 12: 'XII'
     }
 
-    return monthsInRoman[monthNumber]
+    const month = parseInt(monthNumber);
+    return monthsInRoman[month]
   }
 
   async processRequest(request) {

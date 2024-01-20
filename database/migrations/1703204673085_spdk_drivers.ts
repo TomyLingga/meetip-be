@@ -7,7 +7,14 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.integer('user_id')
+      table.string('assignor_id')
+      table.string('mobil')
+      table.string('plat')
       table.string('tujuan')
+      table.string('keperluan')
+      table.date('tgl_berangkat')
+      table.date('tgl_kembali')
+      table.string('lama_hari')
       table.string('keperluan')
 
       /**

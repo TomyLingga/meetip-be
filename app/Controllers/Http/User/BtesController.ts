@@ -184,7 +184,7 @@ export default class BtesController {
 
       const distanceValue = distanceMatrixResponse.data.rows[0].elements[0].distance.value
 
-      if (distanceValue <= 100) {
+      if (distanceValue <= 500) {
         tujuan.attend = true;
         await tujuan.save();
 
@@ -222,7 +222,7 @@ export default class BtesController {
           user_id: userData.sub,
           spdk_id: data.id,
           action: 'FAILED TO ATTEND',
-          info: `Distance is greater than 100 meters. Distance: ${distanceValue} meters`,
+          info: `Distance is greater than 500 meters. Distance: ${distanceValue} meters`,
         })
 
         await trx.commit()
