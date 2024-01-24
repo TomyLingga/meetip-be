@@ -222,13 +222,13 @@ export default class BtesController {
           user_id: userData.sub,
           spdk_id: data.id,
           action: 'FAILED TO ATTEND',
-          info: `Distance is greater than 500 meters. Distance: ${distanceValue} meters`,
+          info: `Distance is greater than 1 kilometers. Distance: ${distanceValue} meters`,
         })
 
         await trx.commit()
 
         return response.status(400).json({
-          error: 'Cannot attend when the distance is greater than 500 meters.',
+          error: 'Cannot attend when the distance is greater than 1 kilometers.',
           currentDistance: distanceValue,
         });
       }
