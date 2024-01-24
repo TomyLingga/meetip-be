@@ -184,54 +184,54 @@ export default class BtesController {
 
       const distanceValue = distanceMatrixResponse.data.rows[0].elements[0].distance.value
 
-      if (distanceValue <= 1000) {
-        tujuan.attend = true;
-        await tujuan.save();
+      // if (distanceValue <= 1000) {
+      tujuan.attend = true;
+      await tujuan.save();
 
-        await data.related('log').create({
-          user_id: userData.sub,
-          spdk_id: data.id,
-          action: 'SUCCESS TO ATTEND',
-          info: `Distance: ${distanceValue} meters`,
-        })
+      await data.related('log').create({
+        user_id: userData.sub,
+        spdk_id: data.id,
+        action: 'SUCCESS TO ATTEND',
+        info: `Distance: ${distanceValue} meters`,
+      })
 
-        const otherDestinations = await Destination.query()
-          .where('forms_id', tujuan.forms_id)
-          // .andWhere('id', '<>', tujuan.id)
-          .andWhere('attend', false)
-          .first()
+      const otherDestinations = await Destination.query()
+        .where('forms_id', tujuan.forms_id)
+        // .andWhere('id', '<>', tujuan.id)
+        .andWhere('attend', false)
+        .first()
 
-          // console.log(otherDestinations)
+        // console.log(otherDestinations)
 
-        if (otherDestinations === null) {
-          // console.log('No other unattended destinations found')
-          data.status = 7
-          data.info = 'Silahkan isi BTE',
-          await data.save()
-        }
-
-        await trx.commit()
-
-        return response.send({
-          success: true,
-        }, 200)
-
-      } else {
-
-        await data.related('log').create({
-          user_id: userData.sub,
-          spdk_id: data.id,
-          action: 'FAILED TO ATTEND',
-          info: `Distance is greater than 1 kilometers. Distance: ${distanceValue} meters`,
-        })
-
-        await trx.commit()
-
-        return response.status(400).json({
-          error: 'Cannot attend when the distance is greater than 1 kilometers.',
-          currentDistance: distanceValue,
-        });
+      if (otherDestinations === null) {
+        // console.log('No other unattended destinations found')
+        data.status = 7
+        data.info = 'Silahkan isi BTE',
+        await data.save()
       }
+
+      await trx.commit()
+
+      return response.send({
+        success: true,
+      }, 200)
+
+      // } else {
+
+      //   await data.related('log').create({
+      //     user_id: userData.sub,
+      //     spdk_id: data.id,
+      //     action: 'FAILED TO ATTEND',
+      //     info: `Distance is greater than 1 kilometers. Distance: ${distanceValue} meters`,
+      //   })
+
+      //   await trx.commit()
+
+      //   return response.status(400).json({
+      //     error: 'Cannot attend when the distance is greater than 1 kilometers.',
+      //     currentDistance: distanceValue,
+      //   });
+      // }
 
     } catch (error) {
       await trx.rollback()
