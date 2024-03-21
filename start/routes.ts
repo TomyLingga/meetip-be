@@ -81,6 +81,9 @@ Route.group(() => {
   Route.put('/booking/update/:id', 'MeetingRoom/User/BookingsController.update')
   Route.put('/booking/cancel/:id', 'MeetingRoom/User/BookingsController.cancel')
 
+  Route.get('/bom/id/:id', 'Hc/BomsController.show')
+  Route.get('/bom/user/:id', 'Hc/BomsController.showByUser')
+
 }).middleware('user')
 
 Route.group(() => {
@@ -88,6 +91,10 @@ Route.group(() => {
   Route.get('/index-spdk', 'Admin/FormsAdminController.index')
   Route.get('/hc/approve/:id', 'Hc/HcBtosController.approveBto')
   Route.put('/hc/decline/:id', 'Hc/HcBtosController.declineBto')
+
+  Route.get('/index-bom-user', 'Hc/BomsController.index')
+  Route.post('/bom-user/add', 'Hc/BomsController.create')
+  Route.put('/bom-user/update/:id', 'Hc/HcBtosController.update')
 
 }).middleware('hc')
 
